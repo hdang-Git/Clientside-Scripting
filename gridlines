@@ -1,0 +1,1459 @@
+//html
+<div id="canvas"></div>
+
+//js
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.width = params.width || 500; //width of canvas
+    params.height = params.height || 500; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+  
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+
+    return graphObj;
+  };
+
+  return fw;
+}
+
+//Drawing Titles
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+  
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+
+    return graphObj;
+  };
+
+  
+  return fw;
+}
+
+//Writing Axes Values
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+  
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+    
+       
+    //Get minY & maxY value in y array
+    var maxY = findMax(arrY);
+    var minY = findMin(arrY);
+
+    //Finds the max value in the array
+    function findMax(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp < arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    //Find the min value in the array
+    function findMin(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp > arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    
+
+    
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+    
+     //Draw the X axis values
+    function drawXAxesValues(){
+      console.log("X value labels");
+      var xPosMark;
+      var yPosMark;
+      var value;
+      ctx.textAlign = "center";
+      for(var i = 0; i < arrX.length; i++){
+        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+        value = arrX[i];
+        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+        console.log("xPosMark: " + xPosMark + " yPos: " + yPosMark);
+        ctx.fillText(value, xPosMark, yPosMark);
+      }
+    }
+    drawXAxesValues();
+    //Draw the Y axis values
+    function drawYAxesValues(){
+      console.log("Y value labels");
+      var ySpacing = graphHeight/arrY.length;
+      for(var i = 0; i < arrY.length; i++){
+        var xPosMark = xPos - fontSize;       
+        var yPosMark= yPos + i * ySpacing;
+        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+      }
+      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+    }
+    drawYAxesValues();
+    
+    return graphObj;
+  };
+
+  
+  return fw;
+}
+
+
+
+/**************************Drawing Axis Values ****************/
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+  
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+    
+       
+    //Get minY & maxY value in y array
+    var maxY = findMax(arrY);
+    var minY = findMin(arrY);
+
+    //Finds the max value in the array
+    function findMax(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp < arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    //Find the min value in the array
+    function findMin(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp > arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    
+
+    
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+    
+     //Draw the X axis values
+    function drawXAxesValues(){
+      console.log("X value labels");
+      var xPosMark;
+      var yPosMark;
+      var value;
+      ctx.textAlign = "center";
+      for(var i = 0; i < arrX.length; i++){
+        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+        value = arrX[i];
+        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+        console.log("xPosMark: " + xPosMark + " yPos: " + yPosMark);
+        ctx.fillText(value, xPosMark, yPosMark);
+      }
+    }
+    drawXAxesValues();
+    //Draw the Y axis values
+    function drawYAxesValues(){
+      console.log("Y value labels");
+      var ySpacing = graphHeight/arrY.length;
+      for(var i = 0; i < arrY.length; i++){
+        var xPosMark = xPos - fontSize;       
+        var yPosMark= yPos + i * ySpacing;
+        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+      }
+      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+    }
+    drawYAxesValues();
+    
+    return graphObj;
+  };
+
+  
+  return fw;
+}
+
+/*************************** Drawing Bar Graph with Animation **************************/
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+    params.colors = params.colors || ["lightblue", "black", "lightgreen", "orange", "salmon", "tan", "mediumslateblue"];
+
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var colors = params.colors;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+    
+       
+    //Get minY & maxY value in y array
+    var maxY = findMax(arrY);
+    var minY = findMin(arrY);
+
+    //Finds the max value in the array
+    function findMax(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp < arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    //Find the min value in the array
+    function findMin(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp > arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    
+
+    
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+    
+     //Draw the X axis values
+    function drawXAxesValues(){
+      var xPosMark;
+      var yPosMark;
+      var value;
+      ctx.textAlign = "center";
+      for(var i = 0; i < arrX.length; i++){
+        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+        value = arrX[i];
+        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+        ctx.fillText(value, xPosMark, yPosMark);
+      }
+    }
+    drawXAxesValues();
+    //Draw the Y axis values
+    function drawYAxesValues(){
+      var ySpacing = graphHeight/arrY.length;
+      for(var i = 0; i < arrY.length; i++){
+        var xPosMark = xPos - fontSize;       
+        var yPosMark= yPos + i * ySpacing;
+        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+      }
+      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+    }
+    drawYAxesValues();
+    
+    
+    
+    //Gets the new height relative to the maxY (scaling)
+    var scale = maxY;
+    var percent = 0;
+    var step = 2;
+    var percentageComplete = 100;
+    function drawBarGraph(){
+      for(var i = 0; i < arrY.length; i++){
+        ctx.fillStyle = colorGraph(i);
+        barHeight = arrY[i]/scale * graphHeight * percent/percentageComplete;
+        xPos = i * (barWidth + margin) + margin * (factor + 1);
+        yPos = graphHeight - barHeight + (margin * factor);
+        ctx.fillRect(xPos, yPos, barWidth, barHeight);
+      }
+      //animate the drawing
+      if(percent < 100){
+        percent += step;
+        requestAnimationFrame(drawBarGraph);
+      }
+    }
+    drawBarGraph();
+    //This function cycles through the color array and adds a gradient for the graph
+    function colorGraph(num){
+      //color graph
+      var gradient=ctx.createLinearGradient(0, graphHeight, graphWidth, graphHeight * 2);
+      gradient.addColorStop(0,colors[num%colors.length]);
+      gradient.addColorStop(1,"whitesmoke");
+      return gradient;
+    }
+    
+    
+    return graphObj;
+  };
+  
+  return fw;
+}
+
+/*************** Line graph with Animation ***********************************/
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+    params.colors = params.colors || ["lightblue", "black", "lightgreen", "orange", "salmon", "tan", "mediumslateblue"];
+
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var colors = params.colors;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+    
+       
+    //Get minY & maxY value in y array
+    var maxY = findMax(arrY);
+    var minY = findMin(arrY);
+
+    //Finds the max value in the array
+    function findMax(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp < arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    //Find the min value in the array
+    function findMin(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp > arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    
+
+    
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+    
+     //Draw the X axis values
+    function drawXAxesValues(){
+      var xPosMark;
+      var yPosMark;
+      var value;
+      ctx.textAlign = "center";
+      for(var i = 0; i < arrX.length; i++){
+        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+        value = arrX[i];
+        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+        ctx.fillText(value, xPosMark, yPosMark);
+      }
+    }
+    drawXAxesValues();
+    //Draw the Y axis values
+    function drawYAxesValues(){
+      var ySpacing = graphHeight/arrY.length;
+      for(var i = 0; i < arrY.length; i++){
+        var xPosMark = xPos - fontSize;       
+        var yPosMark= yPos + i * ySpacing;
+        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+      }
+      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+    }
+    drawYAxesValues();
+    
+    
+    
+    //Gets the new height relative to the maxY (scaling)
+    var scale = maxY;
+    var percent = 0;
+    var step = 2;
+    var percentageComplete = 100;
+    function drawBarGraph(){
+      for(var i = 0; i < arrY.length; i++){
+        ctx.fillStyle = colorGraph(i);
+        barHeight = arrY[i]/scale * graphHeight * percent/percentageComplete;
+        xPos = i * (barWidth + margin) + margin * (factor + 1);
+        yPos = graphHeight - barHeight + (margin * factor);
+        ctx.fillRect(xPos, yPos, barWidth, barHeight);
+      }
+      //animate the drawing
+      if(percent < 100){
+        percent += step;
+        requestAnimationFrame(drawBarGraph);
+      }
+    }
+    //This function cycles through the color array and adds a gradient for the graph
+    function colorGraph(num){
+      //color graph
+      var gradient=ctx.createLinearGradient(0, graphHeight, graphWidth, graphHeight * 2);
+      gradient.addColorStop(0,colors[num%colors.length]);
+      gradient.addColorStop(1,"whitesmoke");
+      return gradient;
+    }
+    
+    //This animates the lines plot
+    var delta = 0;
+    var numPoints = 25;
+    var points = [];    //needs to be defined globally to store all intermediate points between segments
+    function animateLinePlot(){
+      if(delta < points.length - 3){
+        requestAnimationFrame(animateLinePlot);
+      }
+      console.log("DELTA: " + delta);
+      console.log(graphObj.id + " Animation --> x1: " + points[delta].x + " y1: " + points[delta].y + " -> " + " x2: " + points[delta+1].x + " y2: " + points[delta+1].y);
+      drawLine(points[delta].x, points[delta].y, points[delta+1].x, points[delta+1].y, delta);
+      delta++;
+    }
+
+    //This draws the line graph
+    function drawLineGraph(){
+      var maxYY = findMax(arrY);
+      var xRatio = graphWidth/arrX.length;
+      var x1 = 0; 
+      var y1 = 0;   
+      var x2 = 0;
+      var y2 = 0;
+      //get points to draw
+      console.log("Total pts: " + ((arrY.length - 1)* numPoints));
+      for(var i = 0; i < arrY.length - 1; i++){
+        y1 = graphHeight - arrY[i]/maxYY * graphHeight + (margin * factor);
+        y2 = graphHeight - arrY[i+1]/maxYY * graphHeight + (margin * factor);
+
+        //For the line axis with titles
+
+        x1 = xRatio * i + xPos + xRatio/2; //since has string labels, add half to align with center of text
+        x2 = xRatio * (i+1) + xPos + xRatio/2; //since has string labels, add half to align with center of text                    
+
+        console.log("x1: " + x1 + " y1: " + y1 + " -> " + " x2: " + x2 + " y2: " + y2);
+
+        //calculate the "numPoints" points between (x1,y1) & (x2,y2)
+        var xPiece = x2 - x1;
+        var yPiece = y2 - y1;     
+        for(var j = 0; j < numPoints; j++){
+          var xPt = x1 + xPiece * j/numPoints;
+          var yPt = y1 + yPiece * j/numPoints;
+          //console.log("xPt: " + xPt + " " + "yPt:" + yPt);
+          points.push({x: xPt, y: yPt});
+        }
+      }
+      console.log("Points array: " + points);
+      animateLinePlot(points);
+    }
+    drawLineGraph();
+    
+    //This function draws lines. It also sets the width and color of the lines
+    function drawLine(startX, startY, endX, endY, delta){
+      var pieces = numPoints;
+      //console.log("Delta: " + delta + " Pieces: " + pieces + " Color index: " + Math.floor(delta/pieces)%colors.length);
+      ctx.strokeStyle = colorGraph(Math.floor(delta/pieces)); //for every delta, divide by piece length of animation step to get array index
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    return graphObj;
+  };
+  
+  return fw;
+}
+/****************************** Tooltips & Tracing *************************************/
+'use strict';
+//To avoid rewriting document.getElementById()
+      function my$(idName) {
+        return document.getElementById(idName);
+      }
+
+      var graphFw = new GraphFW();
+      var barchart = new graphFw.MakeChart({
+        id: "canvas",
+        chartType: "bar"
+});
+
+function GraphFW() {
+
+  var fw = {};
+
+  // method local to GraphFW
+  function $(element) {
+    return document.getElementById(element);
+  }
+
+  // public method (of the framework) that acts like a constructor to create a 
+  fw.MakeChart = function(params) {
+
+
+    // make sure the id property refers to a DOM element
+    var graphObj = $(params.id);
+
+    // if any of the param properties do not exist, set them to default values.
+    params.title = params.title || "Chart Title";
+    params.fontSize = params.fontSize || 12; 
+    params.width = params.width || 400; //width of canvas
+    params.height = params.height || 400; //height of canvas
+    params.margin = params.margin || 10; //margin between div and canvas
+    params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+    params.yVal = params.yVal || [10, 20, 30, 40, 50];
+    params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+    params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+    params.colors = params.colors || ["lightblue", "black", "lightgreen", "orange", "salmon", "tan", "mediumslateblue"];
+
+    //Make sure both array lengths are the same
+    if (params.xVal.length !== params.yVal.length) {
+      alert("Array lengths differ! Please recheck array set cardinality.");
+      return;
+    }
+
+    /* The scope of these variables is local, cannot be accessed outside this function, 
+     * but because of "closure", they can be accessed by methods within this funtion.    */
+    var title = params.title;
+    var width = params.width; //full graph width
+    var height = params.height; //full graph height
+    var margin = params.margin;
+    var arrX = params.xVal;
+    var arrY = params.yVal;
+    var xAxisTitle = params.xAxisTitle;
+    var yAxisTitle = params.yAxisTitle;
+    var colors = params.colors;
+    var fontSize = params.fontSize;
+    var factor = 8;
+    var xPos = factor * margin; //inner graph x position
+    var yPos = factor * margin; //inner graph y position
+    var graphWidth = width - 2 * xPos; //inner graph width w/o labels area
+    var graphHeight = height - 2 * yPos; //inner graph height w/o labels
+    var barWidth = graphWidth / arrX.length - margin;
+    var barHeight = 0;
+
+    //Set the canvas size
+    graphObj.height = params.height;
+    graphObj.width = params.width;
+    
+    //Create the canvas
+    var canvas = document.createElement('canvas');
+    //get the canvas to draw on
+    var ctx = canvas.getContext('2d');
+    //set style of the canvas
+    canvas.height = graphObj.height;
+    canvas.width = graphObj.width;
+    graphObj.appendChild(canvas);
+
+    
+       
+    //Get minY & maxY value in y array
+    var maxY = findMax(arrY);
+    var minY = findMin(arrY);
+
+    //Finds the max value in the array
+    function findMax(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp < arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    //Find the min value in the array
+    function findMin(arr){
+      var temp = arr[0];
+      for(var i = 1; i < arr.length; i++){
+        if(temp > arr[i]){
+          temp = arr[i];
+        }
+      }
+      return temp;
+    }
+    
+
+    
+    //Draw the horizontal grid lines
+    function drawGridLines() {
+      ctx.strokeStyle = "grey";
+      var ySpacing = graphHeight / arrY.length;
+      for (var i = 0; i < arrY.length; i++) {
+        var yPosMark = yPos + i * ySpacing;
+        ctx.beginPath();
+        ctx.moveTo(xPos, yPosMark);
+        ctx.lineTo(xPos + graphWidth, yPosMark);
+        ctx.stroke();
+      }
+      //draw 0 axis line
+      ctx.beginPath();
+      ctx.moveTo(xPos, yPos + graphHeight);
+      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+      ctx.stroke();
+    }
+    drawGridLines();
+    
+    //Draw the Axes Titles
+    function drawAxesTitles(){
+      //Draw x axis title label
+      ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+      ctx.save();
+
+      //Draw y axis title label
+      ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+      ctx.rotate(3*Math.PI/2);
+      ctx.fillText(yAxisTitle, 0, 0);
+      ctx.restore();
+    }
+    drawAxesTitles();
+    
+     //Draw the chart title
+     function drawChartTitle(){
+       ctx.font = "30px Arial";
+       //ctx.measureText(title).width/2 removed because of button
+       ctx.fillText(title, width/2 - ctx.measureText(title).width/2, yPos/2);
+    }
+    drawChartTitle();
+    ctx.font = "10px sans-serif";
+     //Draw the X axis values
+    function drawXAxesValues(){
+      var xPosMark;
+      var yPosMark;
+      var value;
+      ctx.textAlign = "center";
+      for(var i = 0; i < arrX.length; i++){
+        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+        value = arrX[i];
+        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+        ctx.fillText(value, xPosMark, yPosMark);
+      }
+    }
+    drawXAxesValues();
+    //Draw the Y axis values
+    function drawYAxesValues(){
+      var ySpacing = graphHeight/arrY.length;
+      for(var i = 0; i < arrY.length; i++){
+        var xPosMark = xPos - fontSize;       
+        var yPosMark= yPos + i * ySpacing;
+        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+      }
+      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+    }
+    drawYAxesValues();
+    
+    
+    
+    //Gets the new height relative to the maxY (scaling)
+    var scale = maxY;
+    var percent = 0;
+    var step = 2;
+    var percentageComplete = 100;
+    function drawBarGraph(){
+      for(var i = 0; i < arrY.length; i++){
+        ctx.fillStyle = colorGraph(i);
+        barHeight = arrY[i]/scale * graphHeight * percent/percentageComplete;
+        xPos = i * (barWidth + margin) + margin * (factor + 1);
+        yPos = graphHeight - barHeight + (margin * factor);
+        ctx.fillRect(xPos, yPos, barWidth, barHeight);
+      }
+      //animate the drawing
+      if(percent < 100){
+        percent += step;
+        requestAnimationFrame(drawBarGraph);
+      }
+    }
+    //This function cycles through the color array and adds a gradient for the graph
+    function colorGraph(num){
+      //color graph
+      var gradient=ctx.createLinearGradient(0, graphHeight, graphWidth, graphHeight * 2);
+      gradient.addColorStop(0,colors[num%colors.length]);
+      gradient.addColorStop(1,"whitesmoke");
+      return gradient;
+    }
+    
+    //This animates the lines plot
+    var delta = 0;
+    var numPoints = 25;
+    var points = [];    //needs to be defined globally to store all intermediate points between segments
+    function animateLinePlot(){
+      if(delta < points.length - 3){
+        requestAnimationFrame(animateLinePlot);
+      }
+      drawLine(points[delta].x, points[delta].y, points[delta+1].x, points[delta+1].y, delta);
+      delta++;
+    }
+
+    //This draws the line graph
+    function drawLineGraph(){
+      var maxYY = findMax(arrY);
+      var xRatio = graphWidth/arrX.length;
+      var x1 = 0; 
+      var y1 = 0;   
+      var x2 = 0;
+      var y2 = 0;
+      //get points to draw
+      for(var i = 0; i < arrY.length - 1; i++){
+        y1 = graphHeight - arrY[i]/maxYY * graphHeight + (margin * factor);
+        y2 = graphHeight - arrY[i+1]/maxYY * graphHeight + (margin * factor);
+
+        //For the line axis with titles
+
+        x1 = xRatio * i + xPos + xRatio/2; //since has string labels, add half to align with center of text
+        x2 = xRatio * (i+1) + xPos + xRatio/2; //since has string labels, add half to align with center of text                    
+
+
+        //calculate the "numPoints" points between (x1,y1) & (x2,y2)
+        var xPiece = x2 - x1;
+        var yPiece = y2 - y1;     
+        for(var j = 0; j < numPoints; j++){
+          var xPt = x1 + xPiece * j/numPoints;
+          var yPt = y1 + yPiece * j/numPoints;
+          points.push({x: xPt, y: yPt});
+        }
+      }
+      animateLinePlot(points);
+    }
+    drawLineGraph();
+    
+    //This function draws lines. It also sets the width and color of the lines
+    function drawLine(startX, startY, endX, endY, delta){
+      var pieces = numPoints;
+      //console.log("Delta: " + delta + " Pieces: " + pieces + " Color index: " + Math.floor(delta/pieces)%colors.length);
+      ctx.strokeStyle = colorGraph(Math.floor(delta/pieces)); //for every delta, divide by piece length of animation step to get array index
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    
+     //Create button for download
+        var button = document.createElement("BUTTON");
+        var btnText = document.createTextNode("Download");
+        button.appendChild(btnText);
+        graphObj.appendChild(button);
+        button.style.position = "absolute";
+        button.style.zIndex = 10;
+        //setup onclick event to export data
+        button.onclick = exportDataToCSV;
+        
+        //This function gets the arrays and converts them to a csv file to download
+        //reference https://www.w3schools.com/tags/ref_urlencode.asp
+        function exportDataToCSV(){
+            var arr = [['x', 'y']];
+            for(var i = 1; i <= arrX.length; i++){
+                arr.push([arrX[i-1], arrY[i-1]]);
+            }
+            var csv = [];
+            for(var i = 0; i < arr.length; i++){
+                csv.push(arr[i].join());        //join() automatically adds commas
+            }
+            console.log(csv);
+            var csvString = csv.join("%0A");        //line feed or new line to separate each X, Y row object
+            var anchor = document.createElement("a");
+            anchor.href = "data:attachment/csv," + csvString;
+            console.log("anchor href: " + anchor.href);
+            anchor.target = '_blank';
+            anchor.download = fileName + '.csv';
+            document.body.appendChild(anchor);
+            anchor.click(); //click on the link to automatically open
+        }
+    
+    //Create a second canvas to draw over the original graph (i.e. tooltips, traces, etc)
+    var canvasTool = document.createElement('canvas');
+    var ctxTool = canvasTool.getContext('2d');  
+    canvasTool.height = canvas.height;
+    canvasTool.width = canvas.width;
+    canvasTool.style.zIndex = 10;
+    graphObj.appendChild(canvasTool);       
+
+    //This function creates a vertical line that tracks user movement along the graph 
+    function trace(x, y, offSetGraph){
+      ctxTool.font = 'bold 20px verdana';
+      ctxTool.strokeStyle = "grey";
+      ctxTool.lineWidth = 0.2;
+      //Draw vertical line to trace
+      if(x > offSetGraph && x < graphWidth + offSetGraph){
+        //clear the graph
+        ctxTool.clearRect(0, 0, width, height);
+        ctxTool.beginPath();
+        ctxTool.moveTo(x, offSetGraph);
+        ctxTool.lineTo(x, offSetGraph + graphHeight);
+        ctxTool.stroke();
+      }
+    }
+    //This function shows the values x, y values in a popup based on mouse movement
+    //Currently the xVal calculations are correct but the yVal calculations need debugging
+    function drawToolTip(x, y){
+      //Create tool tip
+        var variance = 5;
+        for(var i = 0; i < points.length; i++){
+          if((x >= points[i].x - variance && x <= points[i].x + variance) &&(y >= points[i].y - variance && y <= points[i].y + variance)){
+            ctxTool.fillStyle = "grey";
+            ctxTool.fillRect(x, y, 80,50);
+            ctxTool.textAlign = "center";
+            ctxTool.font= "8px Arial";
+            ctxTool.fillStyle = "whitesmoke";
+            var xVal = arrX[Math.floor((i+1)/numPoints)];
+            var yVal = arrY[0] + Math.floor((i+1) * (findMax(arrY) -    findMin(arrY))/(points.length-1));
+
+            ctxTool.fillText("x: " +  xVal + "   y: " +  yVal, x + 40, y + 25);
+          
+        }
+      } 
+    }
+
+    //This function tracks the mouse movement on the screen gets 
+    //back the position of the cursor on the screen
+    function trackCursor(e){
+      var offSetGraph = factor * margin;
+      var x = e.pageX - canvas.offsetLeft;
+      var y = e.pageY - canvas.offsetTop;
+      trace(x, y, offSetGraph);
+
+      drawToolTip(x, y);
+
+    }
+        //Listen for mouse movement events
+        canvas.addEventListener('mousemove', function(event){
+            trackCursor(event);
+        });
+    
+    return graphObj;
+  };
+  
+  return fw;
+}
+
+
+/*************************/
+        <img src ="https://www.highcharts.com/joomla/media/templates/highsoft_2015/images/logo.svg" alt="">
+        <br/>
+        
+        <div id="canvas3" class = "level"></div>
+        
+            
+            var linechart2 = new graphFw.MakeChart({
+                id: "canvas3",
+                chartType: "line",
+                xVal: [0, 10, 20, 30, 40],
+                yVal: [0, 50, 60, 80, 90]
+            });
+            

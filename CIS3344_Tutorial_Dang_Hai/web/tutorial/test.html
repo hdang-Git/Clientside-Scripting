@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Demo Charts</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id ="canvas"></div>
+        <div id ="canvas2"></div>
+        <div id="canvas3"></div>
+        <div id="canvas4"></div>
+        <input type="button" value ="test" onclick="changeTitle()"/>
+        <script src="framework.js"></script>
+        <script>
+            'use strict';
+            //To avoid rewriting document.getElementById()
+            function my$(idName) {
+                return document.getElementById(idName);
+            }
+            
+            var graphFw = new GraphFW();
+            var barchart = new graphFw.MakeChart({
+                id: "canvas",
+                chartType: "bar"
+            });
+            var linechart = new graphFw.MakeChart({
+                id: "canvas2",
+                chartType: "line"
+            });
+            
+            var linechart2 = new graphFw.MakeChart({
+                id: "canvas3",
+                chartType: "line",
+                title: "Hello",
+                width: 300,
+                height: 200,
+                xVal: [0, 10, 20, 30, 40],
+                yVal: [0, 50, 60, 80, 90]
+            });
+            function changeTitle(){
+                linechart2.changeChartTitle("yoyoyo");
+                barchart2.redrawBarGraph();
+            }
+            var barchart2 = new graphFw.MakeChart({
+                id: "canvas4",
+                xAxisValOn: "false",
+                yAxisValOn: "false",
+                chartTitleOn: "false",
+                axesTitlesOn: "false",
+                width: 300,
+                height: 300,
+                chartType: "bar"
+            });
+            
+        </script>
+    </body>
+</html>

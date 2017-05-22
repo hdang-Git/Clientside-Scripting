@@ -1,0 +1,325 @@
+.level{
+    display: block;
+    background-color: white;
+    border-radius: 6px;
+}
+.titleHeading{
+    background-color: #FF6384;
+    color: white;
+    padding: 2%;
+    border-radius: 6px;
+}
+.graphGroup{
+        margin: 0 auto;
+    }
+html, body {
+    margin: 0;  /* remove any default spacing */
+    padding: 0; /* remove any default spacing */
+    min-width: 320px; /* don't want to the page titles to wrap */
+    font-family:"proxima-nova", sans-serif;
+    color: black;
+    background-color: #99cc00;
+
+}
+h1 { /* "hero style" page titles */
+    font-size: 1.5em; 
+}
+h2{
+    font-size: 1.0em;
+}
+h3{
+    font-size: 0.5em;
+}
+h1, h2, h3, p{
+    margin-left: 5%;
+    margin-right: 5%;  
+    text-align: center;
+}
+hr{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.sng-page {
+    min-height: 500px; /* fallout for older browsers */
+    min-height: 100vh;
+    padding: 0px 1.0em;   /* top/bottom   then   left/right */
+    padding-bottom: 56px; /* height of footer, make space for fixed footer */
+    border-top: 1px;/* solid blue;*/ /* page divider */
+    padding-top: 36px; /*account for fixed title*/
+}
+#page1, #page2, #page3, #page4, #page5 {
+    border-bottom: solid black 4px;
+}
+/* Responsive styles */
+.container {
+    margin: 0 auto;
+    border-style: solid ;
+    border-color: black;
+    background-color: white;
+    box-sizing: border-box; /* gets rid of horizontal scroll bar, counts padding and border in box size */
+}
+.pageTitle {
+    padding: 10px 15px; /* 1st is top/bottom, 2nd is left/right */
+    color: whitesmoke;
+    margin-bottom: -3px; /* cover up white space between title and content */
+    font-size: 1.3em;
+    line-height: 2.5em;
+}
+#nav {
+    position:fixed;
+    top:0px;
+    right:0px;
+    z-index:2;
+    background-color: rgba(0,0,0, .5);
+    padding: 10px;
+    font-size:18px;
+    font-weight:bold;
+    margin-right:0px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 2px 2px 2px gray;
+}
+#navGroup {
+    display: none; 
+}
+#navIcon {
+    padding-top: 18px;
+    width:100px;
+    box-sizing: border-box;
+}
+.navLink {
+    width:100px;
+    border-bottom: thin solid gray;
+    padding: 4px;
+    display: block;
+    box-sizing: border-box;
+}
+.navLink a{
+    text-decoration: none;
+    color: white;
+}
+.button{
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    background-color:rgba(120, 150, 120, 0.2); 
+    display: inline-block;
+    text-align: center;
+    border-color: white;
+}
+.dark-bg {
+    background: #222;
+}    
+.codeSetup{
+    color: white;
+    border-style: solid; 
+    background-color: #FF6384; 
+    border-color: black; 
+    font-size: medium; 
+    border-radius: 6px;
+    font-family: "courier new", courier, monospace;
+    overflow-x: auto;
+}
+.continue a{
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+}
+.light {
+    color: #fff;
+}
+.sectionSpace{
+    margin: 0% 0%; 
+}
+.button{
+    border: 0;
+    text-align: center;
+    display: inline-block;
+    padding: 16px;
+    margin: 0 8px;
+    color: #FFFFFF;
+    background-color: #E7E9ED;
+    border-radius: 8px;
+    font-family: "proxima-nova-soft", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: box-shadow 200ms ease-out;
+}
+.button_red{
+    background-color: #FF6384;
+}
+.button__blue {
+    background-color: #36A2EB;
+}
+table{
+    margin-top: 5%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    color: white;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #783da8;
+}
+table#t01 tr:nth-child(odd) {
+   background-color: #c584f3;
+}
+table#t01 th {
+    background-color: #612f8a;
+    color: white;
+}
+.codeSample{
+    margin-left: 5%; 
+    margin-right: 5%;
+    background-color: #E7E9ED; 
+    color: black;
+    font-size: 11px;
+    margin-bottom: 5%;
+}
+ol{
+   margin-left: 10%;
+}
+#listConclusion{
+    border-radius: 6px; 
+    border-color: black; 
+    border-style: solid;
+    text-align: left;
+    color: white;
+    background-color: #FF6384;
+}
+.aLink {
+    text-decoration: none;
+    display:inline-block;
+    text-align:center;    
+}  
+.aLink:visited{
+    color: purple;
+}
+
+/* ------------ Desktop Only Styles --------------- */
+@media screen and (min-width: 500px) {
+    html, body {
+        margin: 0;  /* remove any default spacing */
+        padding: 0; /* remove any default spacing */
+        min-width: 320px; /* don't want to the page titles to wrap */
+    }
+    h1 { /* "hero style" page titles */
+        font-size: 3.0em; 
+        text-align: center;
+    }
+    h2{
+        font-size: 2.0em;
+        text-align: center;
+    }
+    h3{
+        font-size: 1.0em;
+        text-align: center;
+    }
+    p{
+        font-size: larger;
+        margin-bottom: 2%;
+    }
+    .continue{
+        margin-left: 45%;
+        margin-right:45%;
+        margin-top: 10%;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        border-style: solid ;
+        border-color: black;
+        background-color: white;
+        box-sizing: border-box; /* gets rid of horizontal scroll bar, counts padding and border in box size */
+    }
+    .continue a{
+        color: white;
+        margin-top: 5%;
+        padding: 1%;
+        font-size: 20px;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 15px 15px;
+    }
+    .navLink{
+        display:inline;
+        border:none;
+        border-right: thin solid gray;
+    }
+    #navGroup {
+        display:block;
+        padding-top: 29px;
+    }
+    #navIcon {
+        display:none;
+    }
+    .clear {
+        clear:both;
+    }
+    .graphGroup{
+        margin-right: 5%;
+        margin-left: 5%;
+        background-color: #36A2EB;
+        border-radius: 6px;
+    }
+    .level{
+        display: inline-block;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+    pre{
+        border-style: solid; 
+        background-color: #FF6384; 
+        border-color: black; 
+        font-size: large; 
+        border-radius: 6px;
+        margin: auto auto;
+        white-space: pre-wrap;
+    }
+    .sectionSpace{
+        margin: auto 20%;
+    }
+    .codeSetup{
+        color: white;
+        border-style: solid; 
+        background-color: #FF6384; 
+        border-color: black; 
+        font-size: medium; 
+        border-radius: 6px;
+        font-family: "courier new", courier, monospace;
+        overflow-x: auto;
+    }
+    .codeSample{
+        margin-left: 20%; 
+        margin-right: 20%;
+        background-color: #E7E9ED; 
+        color: black;
+        font-size: 11px;
+        margin-bottom: 5%;
+    }
+    ol{
+        text-align: left;
+     }
+    #listConclusion{
+        margin-left: 20%; 
+        margin-right: 20%;
+        border-radius: 6px; 
+        border-style: solid;
+        text-align: left;
+        color: white;
+        background-color: #FF6384;
+    }
+}
