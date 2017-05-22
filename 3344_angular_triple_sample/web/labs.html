@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3344 Labs Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: tahoma, sans-serif;
+                font-size: 0.9em;
+                line-height: 2em;
+            }
+            h1 {margin: 0px 3px;}  /* top/bottom left/right */
+            h2 {
+                margin-left: 12px;
+                margin-bottom: -6px;
+            }
+            h3, div {margin-left: 24px;}
+            li {
+                line-height: 1.5em;
+            }
+            pre {
+                line-height: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Your Labs Page</h1>
+
+        <div>
+            ... Other Lab Blogs ...
+        </div>
+
+
+        <h2>Angular Triple Lab</h2>
+
+        <ul>
+            <li>
+                Click <a href="tripleLab/index.html">here</a> to see my 
+                <strong>Angular Triple Lab main page</strong> 
+                (Single Page Application).
+            </li>
+            <li>
+                Click <a href="tripleLab/webAPIs/personListJson.jsp">here</a> to 
+                invoke the <strong>List Web API</strong> - needs no input parameter, 
+                all person data will appear in browser through JSON Viewer plugin. 
+            </li>
+            <li>
+                Click <a href="tripleLab/webAPIs/personDelete.jsp?id=999">here</a> to 
+                invoke the <strong>Delete Web API</strong> - expects parameter 
+                "id" with value specifying which record to delete. This API 
+                returns empty string if the record was sucessfully deleted. 
+                Otherwise, it shows the error message (possible database error, 
+                "0 records deleted", etc). 
+            </li>
+            <li>
+                Click <a href="tripleLab/webAPIs/personInsert.jsp?jsonData={personId:'',name:'Fred',age:34,sex:'Male'}">here</a> to 
+                invoke the <strong>Insert Web API</strong> - expects parameter 
+                "jsonData" to hold a JSON-ized StringData object containing the data to be inserted. 
+                This API returns a JSON-ized StringData object full of 
+                error messages (or empty strings where there is no error). For example, if you provide a URL
+                such as the one below, refresh the page, then see the following JSON data, 
+                it means that your insert worked (no error messages). 
+                <pre>
+         {
+            personId: "",
+            name: "",
+            age: "",
+            sex: "",
+            errorMsg: ""
+        }                </pre>
+            </li>
+            <li>
+                Click <a href="tripleLab/webAPIs/personUpdate.jsp?jsonData={personId:'',name:'',age:'',sex:''}">here</a> to 
+                invoke the <strong>Update Web API</strong>. Like insert, this API 
+                expects parameter "jsonData" to hold a JSON-ized version of StringData that 
+                describes the data to be updated. For update, a valid/existing personId must
+                be supplied. Like insert, this API also returns a JSON-ized version of a 
+                StringData object, full of error messages (or empty string if no error). If there 
+                exists a person with id 109, the following URL should work to update a person record.
+                <pre>
+    <strong>URL:</strong> tripleLab/webAPIs/personUpdate.jsp?jsonData={personId:'109',name:'Sallacious',age:34,sex:'Female'}</pre>
+            </li>
+
+        </ul>
+    </body>
+</html>

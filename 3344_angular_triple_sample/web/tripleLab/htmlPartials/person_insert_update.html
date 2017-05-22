@@ -1,0 +1,34 @@
+<h2>{{insertUpdate}} Person</h2>
+
+<table>
+    <!-- this row will be hidden or displayed depending on the value of boolean isUpdateMode -->
+    <tr data-ng-show="isUpdateMode">
+        <td class="fieldName">Id</td>
+        <td>{{newperson.personId}}</td>
+        <td class="fieldError">{{myErrors.personId}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Name</td>
+        <td><input type="text" ng-model="newperson.name"></td>
+        <td class="fieldError">{{myErrors.name}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Gender</td>
+        <td><input type="text" ng-model="newperson.sex"></td>
+        <td class="fieldError">{{myErrors.sex}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Age</td>
+        <td><input type="text" ng-model="newperson.age"></td>
+        <td class="fieldError">{{myErrors.age}}</td>
+    </tr>
+</table>
+
+<p>
+    <input type="button" value="Insert Save" data-ng-show="isInsertMode" data-ng-click="insertSave()">
+    <input type="button" value="Update Save" data-ng-show="isUpdateMode" data-ng-click="updateSave()">
+    &nbsp;&nbsp;&nbsp;{{status}}
+</p>
+<p>
+    <a href="#/list">back to list</a>
+</p>
