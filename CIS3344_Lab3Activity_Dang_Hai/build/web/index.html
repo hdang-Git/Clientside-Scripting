@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <style>
+            body{
+                background-color: white;
+            }
+            .birdie{
+                position: absolute;
+                float: left;
+                width: 110px;
+                height: 100px;
+                background-image: url("pics/bluejay.png");
+                z-index:2;
+            }
+            
+            .clear{
+                clear: both;
+            }
+            
+            #bigDiv{
+                position: relative;
+                background-color: hotpink;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <!--
+        <div id="pic1" class="birdie"></div>
+        <div id="pic2" class="birdie"></div>
+        <div id="pic3" class="birdie"></div>
+        <div id="pic4" class="birdie"></div>
+        -->
+        <div id="bigDiv">
+            <div id="pic" class="birdie"></div>    
+            <div class="clear"></div>
+            <!--
+            <input type ="button" value="Start" onclick="startAnimation()"/>
+            <input type ="button" value="Start" onclick="stopAnimation()"/>
+            -->
+        </div>
+        
+        
+        <!--<input type="button" value="Advance Animation" onclick="changeImage()"/><br/> -->
+       
+
+        
+        <script type="text/javascript">
+            function setBgPos(ele, left, top){
+                document.getElementById(ele).setAttribute("style", "background-position: " + left + "px " + top + "px;");
+            }
+            /*
+            setBgPos("pic1", 0, 0);
+            setBgPos("pic2", 0, -100);
+            setBgPos("pic3", 0, -200);
+            */
+           
+           //Adding movement
+            var picLeft=200;
+            var picTop =300;
+            function setPos(ele, left, top){
+                document.getElementById(ele).setAttribute("style", "left: " + left + "px;");
+                document.getElementById(ele).setAttribute("style", "top: " + top + "px;");        
+                console.log("left: " + left + " top: " + top);
+            }
+           
+            
+            var height = 100;
+            var i= -1;
+            function changeImage(){
+                i = i+1;
+                if(i > 2){
+                    i = 0;
+                }
+                setBgPos("pic", 0, (-i*height));
+                //adding movement
+                setPos("pic", i*picLeft, i*picTop);
+                console.log("picLeft: " + picLeft + " picTop: " + picTop);
+            }
+            changeImage();
+            
+            var intervalHandle;
+            function startAnimation(){
+                changeImage();
+                intervalHandle = setInterval(changeImage, 250);
+            }
+            function stopAnimation(){
+                clearInterval(intervalHandle);
+            }
+            
+            var bgObj = document.getElementById("bigDiv");
+            
+            function resize(){
+                bgObj.setAttribute("style", "width:" + window.innerWidth+"px");
+                bgObj.setAttribute("style", "height:" + (window.innerHeight -1)+"px");
+                console.log("resized");
+            }
+            resize();
+            
+            window.onresize = resize;
+            
+            
+            document.getElementById("pic").setAttribute("onclick", "clickPic()");
+            var isAnimating = false;
+            function clickPic() {
+                console.log("clicked and isAnimating is " + isAnimating);
+                if (isAnimating) {
+                    stopAnimation();
+                } else {
+                    startAnimation();
+                }
+            }
+            
+            
+            
+            
+            
+        </script>
+    </body>
+</html>

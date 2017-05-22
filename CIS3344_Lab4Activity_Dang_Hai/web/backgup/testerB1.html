@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Slider Tester Framework</title>
+        <style>
+            body {
+                background-color: #CCFFCC; 
+                font-family: Tahoma, Geneva, sans-serif;
+                font-size: 13px;
+            }
+            input {
+                margin-bottom: 4px;
+            }
+        </style>
+    </head>
+    <body >
+        <div id="mySlider">
+        </div>
+
+        <input type="button" value="Call Constructor" onclick="callMakeSlider()">
+        <br/>
+
+        <input type="button" value="Move To >>" onclick="callMoveTo()"> 
+        Top: <input type="text" value="200px" id="toTop"> 
+        Left: <input type="text" value="300px" id="toLeft"> 
+        <br/>
+
+        <input type="button" value="Move (adjust position) >>" onclick="callMove()"> 
+        Top: <input type="text" value="10" id="dTop"> 
+        Left: <input type="text" value="5" id="dLeft"> 
+        <br/>
+
+        <script src="slideFrameworkB.js"></script>
+        <script type="text/javascript">
+
+            // So I don't have to type "document.getElementById()"
+            function my$(idName) {
+                return document.getElementById(idName);
+            }
+
+            // Create (global) framework object so you can use it.
+            // Name it as you like (so no namespace conflict).
+            var sliderFW = MakeSliderFW();
+
+            // Create (global) reference to the slider object that 
+            // you plan to initialize (with button click).
+            var mySliderObj = null;
+
+            // Try calling MakeSlider() with different values for input parameter. 
+            // For example, pass it no input, pass it an object that does not have "id" as property, 
+            // pass it different values to override the defaults that MakeSlider provides.
+            function callMakeSlider() {
+                mySliderObj = sliderFW.MakeSlider({id: "mySlider", backgroundColor: "red"});
+            }
+
+            // Move your slider object where you want it to go.
+            function callMoveTo() {
+                mySliderObj.moveTo(my$("toTop").value, my$("toLeft").value);
+            }
+
+            // Adjust slider object's position (add dTop and dLeft to object's current position).
+            function callMove() {
+                mySliderObj.move(my$("dTop").value, my$("dLeft").value);
+            }
+
+        </script>
+
+    </body>
+</html>

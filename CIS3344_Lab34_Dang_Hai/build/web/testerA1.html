@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Test Slider Framework</title>
+        <style>
+            
+            body {
+                background-color: #CCFFCC; 
+                font-family: Tahoma, Geneva, sans-serif;
+                font-size: 13px;
+            }
+
+            #sunSize{
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+            }
+            
+            #earthSize{
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                left: 250px;
+                top: 250px;
+                position: absolute;
+                animation: rotate 10s linear infinite;
+                transform: rotate(45deg) translateX(150px) rotate(-45deg);
+            }
+            @keyframes rotate {
+                from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+                to   { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+            }
+            
+        </style>
+    </head>
+    <body >
+        <!-- div will be invisible initially, because it has no styling until button click --> 
+        <div id="mySlider" style="position: absolute"> </div>
+        <input type="button" value="Call Constructor" onclick="callMakeSlider()">
+
+        
+        <div id ="MakeAnimation" style="position: absolute"></div>
+        <input type="button" value="Call Constructor for Animation" onclick="MakeAnimation()">
+        
+        <input type="button" value="Move To >>" onclick="callMoveTo()"> 
+        <input type="button" value="Move To >>" onclick="callOrbit()"> 
+        Top: <input type="text" value="200px" id="toTop"> 
+        Left: <input type="text" value="300px" id="toLeft"> 
+        <br/>
+        
+        
+        <div id="sun">
+            <img src ="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=74422923" alt="" id="sunSize"/>       
+        </div>
+        
+        <div id ="earth">
+            <img src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=74422923" alt="" id="earthSize"/>
+        </div>
+        
+        <div id="moon">
+            <img src="http://space-facts.com/wp-content/uploads/moon-transparent.png" alt="" id="moonSize"/>
+        </div>
+        
+        <div id="textInput"></div>
+        
+        <!-- reference external javascript file that holds our framework code -->
+        <script src="slideFrameworkA.js"></script>
+        
+        <script type="text/javascript">
+            
+            // So I don't have to type "document.getElementById()"
+            function my$(idName) {
+                return document.getElementById(idName);
+            }
+            
+            // Create (global) framework object so you can use it.
+            // Name it as you like (so no namespace conflict).
+            var sliderFW = MakeSliderFW();
+
+            var sliderAnimationFW = MakeAnimationFW();
+            
+             var myAnimatedObj = null;
+            
+            // Try calling MakeSlider() with different values for input parameter. 
+            // For example, pass it no input or pass it an object that does not have an "id" 
+            // property (these are both error conditions for which the framework pops up 
+            // an alert).  Try passing it different values to override the defaults that 
+            // MakeSlider provides (check function MakeSlider in slideFramework.js to see 
+            // what properties you can override. 
+            function callMakeSlider() {
+                sliderFW.MakeSlider({id: "mySlider", backgroundColor: "red"});
+            }
+            
+            function MakeAnimation(){
+                myAnimatedObj = sliderAnimationFW.MakeAnimation({id: "MakeAnimation"});
+            }
+            
+            // Move your slider object where you want it to go.
+            function callMoveTo() {
+                myAnimatedObj.moveTo(my$("toTop").value, my$("toLeft").value);
+            }
+            
+            function callOrbit(){
+                myAnimatedObj.startAnimation();
+            }
+
+        </script>
+
+    </body>
+</html>

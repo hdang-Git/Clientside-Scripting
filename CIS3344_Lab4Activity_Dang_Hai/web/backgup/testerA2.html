@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Test Slider Framework</title>
+        <style>
+            body {
+                background-color: #CCFFCC; 
+                font-family: Tahoma, Geneva, sans-serif;
+                font-size: 13px;
+            }
+            input {
+                margin-bottom: 4px;
+            }
+        </style>
+    </head>
+    <body >
+        <div id="mySlider">
+        </div>
+
+        <!-- In this version, we let the user specify the default values -->        
+        <input type="button" value="Call Constructor" onclick="callMakeSlider()">
+
+        <!-- provide default values in textboxes so user sees what is expected -->
+        &nbsp;&nbsp;Top <input type="text" id="myTop" value="200px" size="4">
+        &nbsp;&nbsp;Left <input type="text" id="myLeft" value="300px" size="4">
+        &nbsp;&nbsp;Height <input type="text" id="myHeight" value="100px" size="4">
+        &nbsp;&nbsp;Width <input type="text" id="myWidth" value="100px" size="4">
+        &nbsp;&nbsp;BorderRadius <input type="text" id="myBorderRadius" value="25%" size="4">
+        &nbsp;&nbsp;BackgroundColor <input type="text" id="myBackgroundColor" value="pink" size="12">
+        <br/>
+
+        <script src="slideFrameworkA.js"></script>
+        <script type="text/javascript">
+
+            // So I don't have to type "document.getElementById()"
+            function my$(idName) {
+                return document.getElementById(idName);
+            }
+
+            // Create (global) framework object so you can use it.
+            // Name it as you like (so no namespace conflict).
+            var sliderFW = MakeSliderFW();
+
+            // Try calling MakeSlider() with different values for input parameter. 
+            // For example, pass it no input, pass it an object that does not have "id" as property, 
+            // pass it different values to override the defaults that MakeSlider provides.
+            function callMakeSlider() {
+                sliderFW.MakeSlider({
+                    id: "mySlider",
+                    top: my$("myTop").value,
+                    left: my$("myLeft").value,
+                    height: my$("myHeight").value,
+                    width: my$("myWidth").value,
+                    borderRadius: my$("myBorderRadius").value,
+                    backgroundColor: my$("myBackgroundColor").value
+                });
+            }
+
+        </script>
+
+    </body>
+</html>
