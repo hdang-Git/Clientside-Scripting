@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    </head>
+    <body ng-app="countryApp">
+        <h3>Must "Run" not "View" because this code uses $http (which needs apache)</h3>
+        <div ng-controller="CountryListCtrl">
+            <ul>
+                <li ng-repeat="country in countries">{{country.name}}</li>
+            </ul>
+        </div>
+        <script src="get_with_repeat_app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+        <link href="styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body ng-app="demoApp">
+        <div >
+            <div id='titleNav'>
+                <div id='title'>Using Angular Routing for Layout</div>
+                <div id='nav'>
+                    <div class='navLink'><a href='#home'>Home</a></div>
+                    <div class='navLink'><a href='#labs'>Labs</a></div> 
+                </div>
+            </div>
+            <div style='clear:both'></div>
+            <div ng-view="" id='contentArea'>
+
+            </div>
+        </div>
+        <script src='routing_layout_app.js'></script>
+    </body>
+</html>

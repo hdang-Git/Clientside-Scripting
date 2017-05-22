@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular1 Dependency Injection</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Using the latest recommended URLs for Angular 1 (Spring 2017) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+
+        <!-- Huge thank you for this simple sample code that explains dependency injection: 
+            http://fdietz.github.io/recipes-with-angular-js/controllers/sharing-code-between-controllers-using-services.html
+        -->
+        
+    </head>
+    <body ng-app="MyApp">
+        <div ng-controller="MyCtrl">
+            First User is {{firstUser}}
+        </div>
+        <div ng-controller="AnotherCtrl">
+            Last User is {{lastUser}}
+        </div>
+        <script>
+            var app = angular.module("MyApp", []);
+
+            /*
+             * A service is just a class with exposed (public) methods.
+             */
+            app.factory("UserService", function () {
+                
+                // This array is a private property
+                var users = ["Peter", "Daniel", "Nina"];
+
+                // returning an object that contains two methods (first and last)
+                return {
+                    first: function () {
+                        return users[0];
+                    },
+                    last: function () {
+                        return users[users.length-1];
+                    }
+                };
+            });
+
+            app.controller("MyCtrl", function ($scope, UserService) {
+                $scope.firstUser = UserService.first();
+            });
+
+            app.controller("AnotherCtrl", function ($scope, UserService) {
+                $scope.lastUser = UserService.last();
+            });
+        </script>
+    </body>
+</html>

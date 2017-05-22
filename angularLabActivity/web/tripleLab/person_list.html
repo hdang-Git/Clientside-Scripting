@@ -1,0 +1,14 @@
+<div ng-controller="PersonCtrl">
+    <table>
+        <tr>
+            <th>Id</th><th>Name</th><th>age</th><th>sex</th>
+        </tr>
+        <tr  ng-repeat="person in persons">
+            <td>{{person.personId}}</td>
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.sex}}</td>
+        </tr>
+
+    </table>
+</div>

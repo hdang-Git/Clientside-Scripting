@@ -1,0 +1,15 @@
+<div ng-controller="FlagCtrl">
+    <table>
+        <tr>
+            <th>Id</th><th>Name</th><th>Abbrev</th><th>Image</th>
+        </tr>
+        <tr  ng-repeat="flag in flags">
+            <td>{{flag.countryId}}</td>
+            <td>{{flag.countryName}}</td>
+            <td>{{flag.flagAbbrev}}</td>
+            <td><img src={{flag.flagURL}} alt=""/></td>
+        </tr>
+
+    </table>
+
+</div>

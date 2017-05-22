@@ -1,0 +1,45 @@
+<h2>Scientist List &nbsp; 
+    <span style="font-size:0.6em;"> 
+        <a href="#/insertScientist" style="text-decoration: none; color: rgba(161, 138, 203, 0.8);">(Insert New)</a>
+        &nbsp; &nbsp;
+        (make all links work on your "User" Data List page)
+    </span>
+</h2>
+<div class="searchContainer">
+    <span class="searchLabel"> Search Field: </span>
+    <input ng-model="query" type="text" class="searchField"/>
+</div> 
+<table>
+    <tr>
+        <!-- Trick to sort, create a new field in the controller to sort on for numbers-->
+        <th><a href="" ng-click="sortField = 'scientistIdNum'; reverse = !reverse">Scientist Id</a></th>
+        <th style="text-align: left"><a href="" ng-click="sortField = 'scientistEmail'; reverse = !reverse">Scientist Email</a></th>
+        <th><a href="" ng-click="sortField = 'scientistPassword'; reverse = !reverse">Scientist Password</a></th>
+        <th><a href="" ng-click="sortField = 'scientistName'; reverse = !reverse">Scientist Name</a></th>
+        <th><a href="" ng-click="sortField = 'userRole'; reverse = !reverse">Role Type</a></th>
+    </tr>
+    <tr ng-repeat="scientist in scientists| filter:query | orderBy:sortField:reverse">
+
+        <td style="text-align:center">{{scientist.scientistId}}</td>
+        <td>{{scientist.scientistEmail}}</td>
+        <td>{{scientist.scientistPassword}}</td>
+        <td>{{scientist.scientistName}}</td>
+        <td>{{scientist.userRole}}</td>
+        <!--
+        countryId: "1",
+        countryName: "Afghanistan",
+        flagAbbrev: "afgh",
+        flagURL: "http://jpgraph.net/download/manuals/chunkhtml/images/flag-afgh.png"
+        -->
+
+    </tr>
+    
+</table>
+
+<ul>
+    <li>
+        Click column headings to sort.
+    </li>
+</ul>
+
+{{errorMsg}}

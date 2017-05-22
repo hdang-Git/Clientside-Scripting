@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="personApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Angular.js Example</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    </head>
+    <body ng-controller="personController">
+        <h3>Sorting and Filtering</h3>
+        <p>From NetBeans, select "run" not "view". Click on column headings to sort.</p>
+        Search: <input ng-model="query" type="text"/>
+        <br/><br/>
+        <table>
+            <tr>
+                <th><a href="" ng-click="sortField = 'name'; reverse = !reverse">Name</a></th>
+                <th><a href="" ng-click="sortField = 'gender'; reverse = !reverse">Gender</a></th>
+                <th><a href="" ng-click="sortField = 'age'; reverse = !reverse">Age</a></th>
+            </tr>
+            <tr ng-repeat="person in persons| filter:query | orderBy:sortField:reverse">
+                <td>{{person.name}}</td>
+                <td>{{person.gender}}</td>
+                <td>{{person.age}}</td>
+            </tr>
+        </table>
+        <script src='sorting_and_filtering_app.js'></script>    
+    </body>
+</html>

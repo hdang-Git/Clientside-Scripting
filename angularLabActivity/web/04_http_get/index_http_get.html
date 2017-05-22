@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    </head>
+    <body>
+        <h3>Must "Run" not "View" because this code uses $http (which needs apache)</h3>
+        <div ng-app="myApp" ng-controller="myCtrl"> 
+            <p>Today's welcome message is: <strong> {{myWelcome}}</strong> </p>
+        </div>
+        <p>
+            The 'myCtrl' controller function (at page load time) calls the $http service to make an AJAX call. 
+            "myWelcome" is added as a property of $scope and is set to the AJAX response. Due to binding, the 
+            {{myWelcome}} expression shows that response.
+        </p>
+        <p>Press F12 to see the Chrome console messages.</p>
+        
+        <script src='http_get_app.js'> </script>
+    </body>
+</html>           

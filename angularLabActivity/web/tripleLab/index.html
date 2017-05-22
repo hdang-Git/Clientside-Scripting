@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <title>Angular Stuff</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    </head>
+    <body ng-app="countryApp">
+        <h3>Must "Run" not "View" because this code uses $http (which needs apache)</h3>
+        <div ng-controller="CountryListCtrl">
+            <ul>
+                <li ng-repeat="country in countries">{{country.name}}</li>
+            </ul>
+        </div>
+        
+        <div ng-controller="PersonCtrl">
+            <!--
+            <ul>
+                <li ng-repeat="person in persons">{{person.name}}</li>
+            </ul>
+            -->
+            <table>
+                <tr>
+                    <th>Id</th><th>Name</th><th>age</th><th>sex</th>
+                </tr>
+                <tr  ng-repeat="person in persons">
+                    <td>{{person.personId}}</td>
+                    <td>{{person.name}}</td>
+                    <td>{{person.age}}</td>
+                    <td>{{person.sex}}</td>
+                </tr>
+                
+            </table>
+        </div>
+        <div ng-controller="FlagCtrl">
+            <table>
+                <tr>
+                    <th>Id</th><th>Name</th><th>Abbrev</th><th>Image</th>
+                </tr>
+                <tr  ng-repeat="flag in flags">
+                    <td>{{flag.countryId}}</td>
+                    <td>{{flag.countryName}}</td>
+                    <td>{{flag.flagAbbrev}}</td>
+                    <td><img src={{flag.flagURL}} alt=""/></td>
+                </tr>
+                
+            </table>
+            
+        </div>
+        
+        <script src="js/app.js"></script>
+        <script src="js/personApp.js"></script>
+        <script src="js/flagApp.js"></script>
+        
+    </body>
+</html>
