@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Planet Table (Using Ajax & Jquery)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link href="webApiDomStyles.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+
+            $(document).ready(function ()
+            {         
+                $('#getButton').click(function ()
+                {
+                    //   clear things out from possible previous search...
+                    $("#other").html("");
+                    $("#planetTable").html("");
+
+                    var url = "webApi.jsp";
+
+                    url += "?q=" + $("#planetSearch").val();
+
+                    ajaxSuccess = function (response) {
+                        var obj = eval(response);
+                        
+                        console.log(response);
+                                          
+                        if (obj == null) {
+                            $("#planetTable").html("Error: JSON string evaluated to null.");
+                            return;
+                        }
+                        if (obj.dbError == null) {
+                            $("#planetTable").html("Error: JSON string did not have a 'dbError' property.");
+                            return;
+                        }
+
+                        if (obj.dbError.length > 0) {
+                            $("#planetTable").html("Database error: " + obj.dbError);
+                            return;
+                        }
+
+                        if (obj.recordList == null) {
+                            $("#planetTable").html("Error: JSON string did not have a 'recordList' property.");
+                            return;
+                        }
+
+                        if (obj.recordList.length == 0) {
+                            $("#planetTable").html("No Planets Match Your Search");
+                            return;
+                        }
+
+                        $("#other").html("All planets that match");
+
+                        var numPlanets = obj.recordList.length;
+                        
+                        //Create Table
+                        var pTable = $("#planetTable");
+                        var table = pTable.append("<table></table>");
+                        pTable.addClass("tableLayout");
+                        pTable.append(table);
+                        //Header
+                        table.append("<thead> <td>Planet</td> " 
+                                    +"<td>Planet Name</td>" 
+                                    +"<td>Planet Size</td></th>"
+                                    +"<td>Date Discovered</td>"
+                                    +"<td>Description</td></thead>");
+                        //Add rows
+                        var row = $("<tbody>");
+                        for (i = 0; i < numPlanets; i++) {
+                            //Create row
+                            //check if planet url exists
+                            var planetURL = obj.recordList[i].planetURL;
+                            if (planetURL !== null) {
+                                $("#picture").attr("src", planetURL);
+                            }
+                            //Add elements to row
+                            row.append("<tr><td><img src='"+ planetURL + "' alt ='' id='newImg'/> </td>"
+                                    +"<td>" + obj.recordList[i].planetName + "</td>"
+                                    +"<td>" + obj.recordList[i].planetSize + "</td>"
+                                    +"<td>" + obj.recordList[i].dateDiscovered + "</td>"
+                                    +"<td>" + obj.recordList[i].planetDescrip + "</td></tr>");
+                        }
+                        row.append("</tbody>");
+                        table.append(row);
+                    };
+
+                    ajaxError = function () {
+                        alert("Unable to retrieve data.");
+                    };
+
+                    //The ajax call...
+                    $.ajax(
+                            {
+                                type: "GET",
+                                cache: false,
+                                url: url,
+                                dataType: "json",
+                                timeout: 500, // 6000 milliseconds for at home dev
+                                success: ajaxSuccess,
+                                error: ajaxError
+                            }); //end of $.ajax
+
+                }); // end of click function
+            }); // end of document ready function
+
+        </script>
+
+    </head>
+    <body>
+        <div id="box">
+            <h1>Search Planets</h1>
+            Must "Run" (through localhost), not "View"
+            <br/><br/>
+            Enter starting characters of planet for search, for example
+            <br/><br/>
+            <input type="text" id="planetSearch" value="M" size="30" />
+            <input type="button" value="Get Planet" id="getButton"/>
+            <br/>
+            <h3 id="other"></h3>
+            <div id="planetTable"></div>
+        </div>
+    </body>
+</html>

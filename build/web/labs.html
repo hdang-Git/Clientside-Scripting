@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Cosmic Perspective</title>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    </head>
+    <body>
+        <div ng-app="">
+            <div  id="container">
+                <div ng-include src="'top.html'"> </div> <!-- will insert "top.html" code here -->
+                <div id="content">
+                    <h1 class="titleHeading">Labs Page</h1>
+                    
+                    <!--Lab1-->
+                    <h2 class="labList"> Lab 1: Home Page (no Bootstrap) </h2>
+                    <h3 class="labHeading">Experience:</h3>
+                    <p>
+                        Coming into this class, I can say that I've had little experience with html/css & javascript. The only time I really started looking into front-end development
+                        was probably around my sophomore year of college when I wanted to pick up a few skills to create a website for myself which didn't really take off. However that was a 
+                        lifetime ago, so I don't really remember what I did before. In today's industry, I see being able to develop sites for the web are important due to its demand
+                        and versatility.
+                    </p>
+                    <h3 class="labHeading">CSS Techniques Utilized: </h3>
+                    <p>                        
+                        The advanced CSS techniques that were utilized for this application were rounded corners on the images and container. For the image, a box shadow was implemented with a 
+                        gradient for blur effect. Also for body background, a gradient color was applied from top left to bottom right.
+                    </p>
+                    <h3 class="labHeading">What I learned:</h3>
+                    <ul id="listText">
+                        <li>I learned how to properly style css sheets using different css selectors and how to use floats.</li>
+                        <li>I also learned the magic of angular js which can be used to include code snippets into an html page.</li>
+                        <li>Another thing I learned was how to embed a youtube video using an iframe.</li>
+                    </ul>
+                    
+                    <a href="01_layout/index.html" id="labLink">Link to 01_layout/index.html</a>
+                    <hr/>
+                    
+                    <!--Lab2 -->
+                    <h2 class="labList"> Lab 2: Advanced Layout (no Bootstrap) </h2>
+                    <p>For this week's lab, the aspects that I found easy were the virtual paging and the forms. 
+                    One of the harder aspect that I struggled with was the responsive design using media queries where 
+                    I had to play around a lot with making it both mobile and desktop friendly. 
+                    It was especially hard in getting the images to line up under each other in a mobile view 
+                    by setting the width to 100% while changing that to a smaller value in a desktop view. Likewise 
+                    for the navigation bar to hide and show the hamburger menu upon shrinking.
+                    In fact, it was definitely an interesting study in JQuery since it's my first time using it. 
+                    Another aspect of difficulty was getting the text area change dynamically so I wrote some Javascript 
+                    code to modify column size depending on the window size since we just learned some JS this week.</p>
+                    <a href="02_advLayout/index.html" id="labLink">Link to 02_advLayout/index.html</a>
+                    <hr/>
+                    
+                    <!--Lab3 -->
+                    <h2 class="labList"> Lab 3 & 4: JavaScript Intro (JS Framework) & Advanced Javascript (No jQuery) Lab </h2>
+                    <p>In this lab, I had to create a framework of my choosing of which I chose to be about the solar system.
+                    The aspect of the lab that I found easy was being able to instantiate the object using my framework's 
+                    constructor. Another easy part was handling different javascript events.
+                    Of course though the harder features to implement was the calculations for figuring out the circular path 
+                    of the planetary orbits. Earlier on, I had tried to implement CSS3 features that would be integrated into
+                    the framework so as to have rotational spins of individual planets and maybe a 3d representation. Unfortunately 
+                    a simple implementation without importing libraries couldn't be found. Apart from that, it took me a while to 
+                    implement resizing so when the screen is resized, it should still retain the animation for the planets. 
+                    Another challenge was getting the orbits to line up exactly with the planets by having a canvas overlay the 
+                    div containing the planets. Also a stretch goal that I accomplished unrelated to the framework but in js was 
+                    that I managed to implement mp3 audio to play in the background when the image button is clicked. 
+                    I definitely had fun in this lab and maybe got a little carried away with implementing features.
+                    I think that if I had more time, I would have tried to add the option of seeing it in 3d. Also if I had more
+                    time, I definitely would have recalculated the orbits using Kepler's laws which relates the planet's periodic 
+                    motion to its radius from a Newtonian perspective.</p>
+                    <a href="03_jsIntro/index.html" id="labLink">Link to 03_jsIntro/index.html</a>
+                    <hr/>
+                    
+                    
+                    <h2 class="labList"> Lab 5: Database Lab  </h2>
+                    <p>For this lab I learned how to create a database using mysql workbench. I also learned how to force errors onto the
+                        database software along with database concepts. I also learned about the intricacies with things such as 
+                        tunneling in depending on your connection
+                    </p>
+                    <a href="CIS3344_Lab5_Report.pdf" id="labLink">Link to 05_DatabaseLab</a>
+                    <hr/>
+                    
+                    
+                    <h2 class="labList"> Lab 6: Web API Lab  </h2>
+                    <p> In this lab, I connected to the backend and created a Web API which I used. Setting up the connections and the prepared statements 
+                        was pretty easy for me considering my recent experience with it. The only major problem in the lab that I had 
+                        was with the Cross Origin Resource Sharing which prevented me from getting data. In order to bypass this I had 
+                        to install a plugin. Also I had to change the ajax timeout to 6 seconds. Another difficult part of the project
+                        for me was learning jquery to display the table. Aside from all of that, it was a very interesting project.
+                        Click on the links below to check it out.
+                    </p>
+                    <p>
+                    Link to JSON pull: <a href="webApi.jsp" id="labLink">webApi.jsp</a>
+                    <br/>
+                    Link to Javascript: <a href="testApiDomJs.html" id="labLink">testApiDomJs.html</a>
+                    <br/>
+                    Link to JQuery: <a href="testApiDomJq.html" id="labLink">testApiDomJq.html</a>
+                    </p>
+                    <hr/>
+                    
+                    <h2 class="labList"> Tutorial Lab  </h2>
+                    <p> In this lab, I learned a lot about rolling out my own framework dynamically at runtime.
+                        I especially enjoyed creating the bar & line charts. If I had more time, I would have 
+                        definitely first refactored my code into a factor design pattern to save space and 
+                        run time efficiency. As for features I would love to finish would be the tracer for
+                        the bar graph, the zooming & dragging capability, and add in a pie chart. Overall though, 
+                        this was no easy feat but I had some fun with it. I definitely figured out how to use
+                        code pen more efficiently in my own project. I especially liked the fact that I 
+                        was able to implement the downloading of csv files from the graph. 
+                        Click on the links below to check it out.
+                    </p>
+                    <p>
+                    Link to Tutorial Page: <a href="tutorial/index.html" id="labLink">Tutorial</a>
+                    <br/>
+                    Link to Demo Page: <a href="tutorial/test.html" id="labLink">Demo</a>
+                    </p>
+                    <hr/>
+                    
+                    <h2 class="labList"> Angular JS Triple Lab: Part 1  </h2>
+                    <p> For this lab, the scope of this part was to use the web api from the previous lab and get that back
+                        from the database to populate the respective tables. Above all, the focus was also to focus on 
+                        CRUD mainly inserting into a database. For me, working on the backend was really no challenge 
+                        but it still took a little time to implement. The challenging part was understanding the intricacies of 
+                        angular and getting that to work properly. Specifically performing a trick on the sorting when getting back 
+                        the JSON data. 
+                    </p>
+                    <p>
+                    Link to Other Table: <a href="tripleLab/index.html" id="labLink">planet_list.html</a>
+                    <br/>
+                    Link to Insert Other Form: <a href="tripleLab/#/insertPlanet" id="labLink">planet_insert_update.html</a>
+                    <br/>
+                    Link to User Table: <a href="tripleLab/#/list" id="labLink">scientist_list.html</a>
+                    <br/>
+                    Link to Insert User Form: <a href="tripleLab/#/insertScientist" id="labLink">scientist_insert_update.html</a>
+                    <br/>
+                    Link to Get Other List API: <a href="tripleLab/webAPIs/getOtherListAPI.jsp" id="labLink">getOtherListAPI.jsp</a>
+                    <br/>
+                    Link to Insert Other API <a href="tripleLab/webAPIs/insertOtherAPI.jsp" id="labLink">insertOtherAPI.jsp</a>
+                    <br/>
+                    Link to Get User List API: <a href="tripleLab/webAPIs/getUserListAPI.jsp" id="labLink">getUserListAPI.jsp</a>
+                    <br/>
+                    Link to Insert User API <a href="tripleLab/webAPIs/insertUserAPI.jsp" id="labLink">insertUserAPI.jsp</a>
+                    </p>
+                    <hr/>
+                    
+                    
+                    <h2 class="labList"> Angular JS Triple Lab: Part 2  </h2>
+                    <p> In this lab, I learned more about implementing CRUD by implementing the update, view, and delete functionality.
+                        As for challenges, there were really none save for understanding how the id is retrieved from the url in angular
+                        via the $routeParams object. It's actually a really interesting aspect of the framework. 
+                        As for the easy part, it was with handling the backend for the delete, read, and update. 
+                    </p>
+                    <p>
+                    Link to Other Table with full CRUD operations: <a href="tripleLab/index.html" id="labLink">planet_list.html</a>
+                    <br/>
+                    Link to View with id 1: <a href="tripleLab/#/show/1" id="labLink">planet_detail.html</a>
+                    <br/>
+                    Link to Get Other API: <a href="tripleLab/webAPIs/getOtherAPI.jsp" id="labLink">getOtherAPI.jsp</a>
+                    <br/>
+                    Link to Update Other API <a href="tripleLab/webAPIs/updateOtherAPI.jsp" id="labLink">updateOtherAPI.jsp</a>
+                    <br/>
+                    Link to Delete Other API: <a href="tripleLab/webAPIs/deleteOtherAPI.jsp" id="labLink">deleteOtherAPI.jsp</a>
+                    </p>
+                    <hr/>
+                    
+                    <h2 class="labList"> Angular JS Triple Lab: Part 3  </h2>
+                    <p> For this lab, I learned how to implement logon and logoff features into my webpage, preventing non-loggedin users
+                        from updating, deleting or inserting into the database. I also learned angular features and how to use that in
+                        tandem with the concepts of data persistence.  As for challenges, there were quite a few mostly in deciding 
+                        the best way to implement the log on. To be honest, the instruction weren't very clear at first in 
+                        in this respect but I eventually got it. One of the things I spent time on was thinking that through 
+                        angular routing that the email & password would be retrieved from the login page url. However, I discovered 
+                        that only the url passed to the webapi would handle that, so there was no need to deal with the actual angular 
+                        routing url. As for the easy part, it was with dealing with the frontend and getting the logon search working
+                        since this was done before in the other class. 
+                    </p>
+                    <p>
+                    Link to Login Page: <a href="tripleLab/#/logon" id="labLink">logon.html</a>
+                    <br/>
+                    Link to Logout Page: <a href="tripleLab/#/logoff" id="labLink">logoff.html</a>
+                    <br/>
+                    Link to Home Page: <a href="tripleLab/index.html" id="labLink">planet_list.html</a>
+                    <br/>
+                     Link to Logon API: <a href="tripleLab/webAPIs/logonAPI.jsp?email=&password=" id="labLink">logonAPI.jsp</a>
+                    <br/>
+                     Link to Logoff API: <a href="tripleLab/webAPIs/logoffAPI.jsp" id="labLink">logoffAPI.jsp</a>
+                    </p>
+                    <hr/>
+                </div>
+
+                <div ng-include src="'bottom.html'"></div>
+            </div> <!-- container -->
+        </div>
+    </body>
+</html>

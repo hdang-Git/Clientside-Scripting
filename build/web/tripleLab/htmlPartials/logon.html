@@ -1,0 +1,45 @@
+
+<!--
+<table>
+    <tr>
+        <td class="fieldName">Email</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="email" ng-model="newscientist.scientistEmail"></td>
+        <td class="fieldError">{{myErrors.scientistEmail}}</td>
+    </tr>
+
+    <tr>
+        <td class="fieldName">Scientist Password</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="password" ng-model="newscientist.scientistPassword"></td>
+        <td class="fieldError">{{myErrors.scientistPassword}}</td>
+    </tr>
+</table>
+-->
+<div class = "loginInput">
+    <h2>Login</h2>
+    <label class="labelForm"> Email address: </label> <br/> 
+    <input type="email" ng-model="newscientist.scientistEmail" class="inputForm"  ng-init="newscientist.scientistEmail ='cSagan@cornell.edu'"> &nbsp;&nbsp;
+    <span class="fieldError popout">{{myErrors.scientistEmail}}</span>
+
+    <br/><br/>
+    <label class="labelForm"> Password: </label> <br/>
+    <input type="password" ng-model="newscientist.scientistPassword" class="inputForm" ng-init="newscientist.scientistPassword ='cosmos'"> &nbsp;&nbsp;
+    <span class="fieldError popout">{{myErrors.scientistPassword}}</span>
+    
+    <p>
+    <input type="button" value="Login"  data-ng-click="loginSubmit()" class="formButton">
+    &nbsp;&nbsp;&nbsp;
+    </p>
+    <p>
+        {{status}}
+    </p>
+</div>
+
+<p>
+    <a href="#/home" class="link">back to home</a>
+</p>

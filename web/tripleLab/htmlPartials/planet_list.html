@@ -1,0 +1,59 @@
+<h2>Planet List &nbsp; 
+    <span style="font-size:0.6em;"> 
+        <a href="#/insertPlanet" style="text-decoration: none; color: rgba(161, 138, 203, 0.8);" data-ng-show="isLoggedOn">(Insert New)</a>
+        &nbsp; &nbsp;
+        (make all links work on your "Other" Data List page)
+    </span>
+</h2>
+<h2>{{isLoggedOn ? 'Logged On' : 'Logged Off'}}</h2>
+<div class="searchContainer">
+    <span class="searchLabel"> Search Field: </span>
+    <input ng-model="query" type="text" class="searchField"/>
+</div>
+<table>
+    <tr> 
+        <th></th>
+        <th data-ng-show="isLoggedOn"></th>
+        <th data-ng-show="isLoggedOn"></th>
+       <th><a href="" ng-click="sortField = 'planetIdNum'; reverse = !reverse">Planet Id</a></th>
+        <th style="text-align: left"><a href="" ng-click="sortField = 'planetName'; reverse = !reverse">Planet Name</a></th>
+        <th><a href="" ng-click="sortField = 'planetSizeNum'; reverse = !reverse">Planet Size</a></th>
+        <th><a href="" ng-click="sortField = 'dateDiscoveredNum'; reverse = !reverse">Date Discovered</a></th>
+        <th><a href="" ng-click="sortField = 'planetDescrip'; reverse = !reverse">Description</a></th>
+        <th style="color:white;">Planet</th>
+    </tr>
+    <tr ng-repeat="planet in planets| filter:query | orderBy:sortField:reverse">
+ 
+        <td>
+            <a href="#/show/{{planet.planetId}}"><img src="icons/view.png"></a>
+        </td>
+        <td data-ng-show="isLoggedOn">
+            <a href="#/update/{{planet.planetId}}"><img src="icons/update.png" alt=""></a>
+        </td>
+        <td data-ng-show="isLoggedOn">
+            <a href="#/delete/{{planet.planetId}}"><img src="icons/delete.png"></a>
+        </td> 
+        <!--<td style="text-align:center; display: none;">{{planet.planetId}}</td>-->
+        <td style="text-align:center">{{planet.planetId}}</td>
+        <td>{{planet.planetName}}</td>
+        <td>{{planet.planetSize}}</td>
+        <td>{{planet.dateDiscovered}}</td>
+        <td>{{planet.planetDescrip}}</td>
+        <td><img src="{{planet.planetURL}}" width="80" alt=""></td>
+        <!--
+        countryId: "1",
+        countryName: "Afghanistan",
+        flagAbbrev: "afgh",
+        flagURL: "http://jpgraph.net/download/manuals/chunkhtml/images/flag-afgh.png"
+        -->
+
+    </tr>
+</table>
+
+<ul>
+    <li>
+        Click column headings to sort.
+    </li>
+</ul>
+
+{{errorMsg}}

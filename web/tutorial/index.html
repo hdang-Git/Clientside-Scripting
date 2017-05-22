@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ChartBased.JS Tutorial</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="tutorialStyles.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        
+        <div id="nav">
+            <div id="navIcon">
+                <img src="../pics/menuIcon.png" alt="" width="43"/>
+            </div>
+            <div id="navGroup">
+                <div class="navLink"><a href="#page1">Introduction</a></div>
+                <div class="navLink"><a href="#page2">Getting Started</a></div>
+                <div class="navLink"><a href="#page3">How to Use?</a></div>
+                <div class="navLink"><a href="#page4">Make your Own!</a></div>
+                <div class="navLink"><a href="#page5">Conclusion & Summary</a></div>
+            </div>
+        </div>  <!--  end of nav -->
+
+        <div class="container">
+        <!-- Page 1 -->
+        <div id="page1" class="sng-page"> 
+            <h1 class="titleHeading">ChartBased.JS</h1>
+            <h2>About the framework</h2>
+            <hr>
+            <p><strong>ChartBased.JS is framework I made that creates different graphs like the ones below. It gives user the ability to roll out their own customized
+               charts with the added benefit of being able to control chart appearances. Made for designers, developers, and everyone else in between. </strong>
+            </p>
+            <div class="graphGroup">
+                <div id ="canvas" class = "level"></div>
+                <div id ="canvas2" class = "level"></div>
+            </div>
+            
+            <hr>
+        </div>
+        <div id="page2" class="sng-page">
+            <h2>Getting Started</h2>
+            <hr>
+            <div class="sectionSpace">
+                <p >To import the library to your html file, copy this:</p>
+                <pre class="codeSetup">
+                    <code>
+                        <strong>&lt;script src="framework.js"&gt;&lt;&#47;script &gt;</strong>
+                    </code>
+                </pre>
+            </div>
+            <div class="sectionSpace">
+                <p >In your html include this line to reference other elements to use<p>
+                <pre class="codeSetup">
+                    <code>
+                        <strong>
+                        'use strict'; <br/>
+                        function my$(idName) {
+                            return document.getElementById(idName);
+                        }
+                        </strong>
+                    </code>
+                </pre>
+            </div>
+            <div  class="continue button button__blue" style="text-align: center"><a href="../tutorial.zip">Download Sample</a></div>
+            
+        <hr>
+        </div>
+        <div id="page3" class="sng-page">
+        <h2>How to use the framework?</h2>
+        <hr>
+        <div class="sectionSpace">
+            <p>To use the framework create a div in your html<p>
+            <pre class="codeSetup">   
+                <code>
+                    &lt;div id ="canvas"&gt;&lt;/div&gt;
+                </code> 
+            </pre>
+            <br/>
+            <p>In your javascript tag, instantiate the framework and call on the constructor filling in the data you want.</p>
+            <pre class="codeSetup">
+                <code>
+                var graphFw = new GraphFW();
+                var barchart = new graphFw.MakeChart({
+                    id: "canvas",
+                    chartType: "bar"
+                });
+                </code>
+            </pre>
+            <hr style = "margin-top: 2%;">
+            <table id="t01">
+                <thead>
+                <tr>
+                    <th>Property Name</th><th>Description</th>                    
+                </tr>
+                </thead>
+                <tr>
+                    <td>title</td><td> The title of the chart.</td>
+                </tr>
+                <tr>
+                    <td>chartType</td><td>Chart type. Input a string either "Bar" or "line". Not case sensitive.</td>
+                </tr>
+                <tr>
+                    <td>fontSize</td><td>Font size of text. Input a number.</td>
+                </tr>
+                <tr>
+                    <td>width</td><td>Total width of the canvas to draw on. Input a number.</td>
+                </tr>
+                <tr>
+                    <td>height</td><td>Total height of the canvas to draw on. Input a number.</td>
+                </tr>
+                <tr>
+                    <td>margin</td><td>Spacing between canvas and inner graph. Input a number.</td>
+                </tr>
+                <tr>
+                    <td>xVal</td><td>An array of data. Can accept either string or number values.</td>
+                </tr>
+                <tr>
+                    <td>yVal</td><td>An array of data. Can accept either string or number values.</td>
+                </tr>
+                <tr>
+                    <td>xAxisTitle</td><td>Title for xVal data series.</td>
+                </tr>
+                <tr>
+                    <td>yAxisTitle</td><td>Title for yVal data series.</td>
+                </tr>
+                <tr>
+                    <td>colors</td><td>An array of colors that the graph can use.</td>
+                </tr>
+                <tr>
+                    <td>axesTitlesOn</td><td>A boolean string "true" or "false". Displays the x & y axis titles.</td>
+                </tr>
+                <tr>
+                    <td>gridLinesOn</td><td>A boolean string "true" or "false". Displays the x axis grid lines.</td>
+                </tr>
+                <tr>
+                    <td>xAxisValOn</td><td>A boolean string "true" or "false". Displays the x axis values.</td>
+                </tr>
+                 <tr>
+                    <td>yAxisValOn</td><td>A boolean string "true" or "false". Displays the y axis values.</td>
+                </tr>
+                <tr>
+                    <td>chartTitleOn</td><td>A boolean string "true" or "false". Displays the chart title</td>
+                </tr>
+                <tr>
+                    <td>vertTraceOn</td><td>A boolean string "true" or "false". Displays the vertical bar that follows mouse movement for linechart</td>
+                </tr>
+                <tr>
+                    <td>toolTipOn</td><td>A boolean string "true" or "false" for input. Displays values of graph when mouse hovers over it for linechart.</td>
+                </tr>
+                <tr>
+                    <td>fileName</td><td>A file name for the spreadsheet. File extension .csv is automatically appended.</td>
+                </tr>
+                <tr>
+                    <td>border</td><td>Border style around the canvas. Refer to css style docs.</td>
+                </tr>
+                <tr>
+                    <td>borderRadius</td><td>Border radius for the canvas, just a number for input.</td>
+                </tr>
+                <tr>
+                    <td>position</td><td>Positioning of the canvas.</td>
+                </tr>
+
+            </table>
+        </div>
+        
+        </div>
+       <div id="page4" class="sng-page"> 
+            <h2>Tutorial: Make your own!</h2>
+            <hr>
+            <h3>Properties to create</h3>
+            <p> The following sections will focus on creating the basis for both the bar and line chart. 
+                The list of properties for the graph framework that had to be created is listed in the table above and the code shown below.
+                Error handling is done in code but not shown here for brevity.
+                <br/>
+                <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes' class="aLink">Link to canvas api.</a>
+            </p>
+            <pre class="codeSample">
+            <code>
+                // if any of the param properties do not exist, set them to default values.
+                params.title = params.title || "Chart Title";
+                params.chartType = params.chartType || "Bar";
+                params.fontSize = params.fontSize || 12; 
+                params.width = params.width || 500;     //width of canvas
+                params.height = params.height || 500;   //height of canvas
+                params.margin = params.margin || 10;    //margin between div and canvas
+                params.xVal = params.xVal || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+                params.yVal = params.yVal || [10, 20, 30, 40, 50];
+                params.xAxisTitle = params.xAxisTitle || "X-Axis Title";
+                params.yAxisTitle = params.yAxisTitle || "Y-Axis Title";
+                params.colors = params.colors || ["lightblue", "black", "lightgreen", "orange", "salmon", "tan", "mediumslateblue"];
+                params.axesTitlesOn = params.axesTitlesOn || "true";
+                params.gridLinesOn = params.gridLinesOn || "true";
+                params.xAxisValOn = params.xAxisValOn || "true";
+                params.yAxisValOn = params.yAxisValOn || "true";
+                params.chartTitleOn = params.chartTitleOn || "true";
+                params.vertTraceOn = params.vertTraceOn || "true";
+                params.toolTipOn = params.toolTipOn || "true";
+                params.fileName = params.fileName || 'testFile';
+
+                //Make sure both array lengths are the same
+                if(params.xVal.length !== params.yVal.length){
+                    alert("Array lengths differ! Please recheck array set cardinality.");
+                    return;
+                }
+
+                /* The scope of these variables is local, cannot be accessed outside this function, 
+                 * but because of "closure", they can be accessed by methods within this function.    */
+                var title = params.title;
+                var chartType = params.chartType;
+                var width = params.width;   //full graph width
+                var height = params.height; //full graph height
+                var margin = params.margin;
+                var arrX = params.xVal;
+                var arrY = params.yVal;
+                var xAxisTitle = params.xAxisTitle;
+                var yAxisTitle = params.yAxisTitle;
+                var fontSize = params.fontSize;
+                var colors = params.colors;
+                var axesTitlesOn = params.axesTitlesOn;
+                var gridLinesOn = params.gridLinesOn;
+                var xAxisValOn = params.xAxisValOn;
+                var yAxisValOn = params.yAxisValOn;
+                var chartTitleOn = params.chartTitleOn;
+                var vertTraceOn = params.vertTraceOn;
+                var toolTipOn = params.toolTipOn;
+                var fileName = params.fileName;
+                var factor = 8;
+                var xPos = factor * margin;             //inner graph x position
+                var yPos = factor * margin;             //inner graph y position
+                var graphWidth = width - 2 * xPos;      //inner graph width w/o labels area
+                var graphHeight = height - 2 * yPos;    //inner graph height w/o labels
+                var barWidth = graphWidth/arrX.length - margin;
+                var barHeight = 0;
+            </code>
+
+            </pre>
+            <p> This is the basic skeleton of the html code calling on the framework </p> 
+            <pre class="codeSample">
+                <code>
+                    &lt;body&gt;
+                    &lt;div id ="canvas"&gt;&lt;/div&gt;
+                    &lt;script src="framework.js"&gt; &lt;/script
+                    &lt;script&gt;
+                        'use strict';
+                        //To avoid rewriting document.getElementById()
+                        function my$(idName) {
+                            return document.getElementById(idName);
+                        }
+
+                        var graphFw = new GraphFW();
+                        var barchart = new graphFw.MakeChart({
+                            id: "canvas",
+                            chartType: "bar"
+                        });
+                    &lt;/script&gt;
+                    &lt;/body&gt;   
+                </code>
+            </pre>
+            <hr>
+            <h3>Creating Grid Lines</h3>
+            <p> In order to create gridLines, a gridLines function was created that drew horizontal lines as grids based on the canvas's inner graph height & width.
+            This was calculated by yPos & xPos being the offset of the user selected margin space from where the inner graph starts. From there, the line is drawn 
+            from offset to graphWidth for the x axis, looped for each y value. <br/>
+            <a href='https://www.w3schools.com/tags/canvas_lineto.asp' class="aLink">Link to drawing lines.</a>
+            </p>
+            <pre class="codeSample">
+                <code>
+                    //Draw the horizontal grid lines
+                    function drawGridLines() {
+                      ctx.strokeStyle = "grey";
+                      var ySpacing = graphHeight / arrY.length;
+                      for (var i = 0; i &lt; arrY.length; i++) {
+                        var yPosMark = yPos + i * ySpacing;
+                        ctx.beginPath();
+                        ctx.moveTo(xPos, yPosMark);
+                        ctx.lineTo(xPos + graphWidth, yPosMark);
+                        ctx.stroke();
+                      }
+                      //draw 0 axis line
+                      ctx.beginPath();
+                      ctx.moveTo(xPos, yPos + graphHeight);
+                      ctx.lineTo(xPos + graphWidth, yPos + graphHeight);
+                      ctx.stroke();
+                    }
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="gmjVaE" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Gridlines " class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/gmjVaE/">Gridlines </a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Making Titles</h3>
+            <p>To create Axes titles, we need two functions, drawAxesTitles() & drawChartTitle(). Drawing the chart title, the position must be calculated as half the graph width 
+            and half the offset from y zero-line. Same is done for the x axis title with a different calculation. The important thing to take away from drawAxesTitles() is the
+            y axis title. In order to draw rotated, the canvas state must be saved because when the canvas flips, it loses the original image. Remember the unit circle? To write 
+            on the side, that's a 3pi/2 rotation. From there, restore() is called to bring back the original canvas. <br/>
+            <a href='https://newspaint.wordpress.com/2014/05/22/writing-rotated-text-on-a-javascript-canvas/' class="aLink">Link to writing rotated text.</a>
+            </p>
+            <pre class="codeSample">
+                <code>
+                    //Draw the Axes Titles
+                    function drawAxesTitles(){
+                        //Draw x axis title label
+                        ctx.fillText(xAxisTitle, xPos + graphWidth/2 , yPos + graphHeight + fontSize*3);
+                        ctx.save();
+
+                        //Draw y axis title label
+                        ctx.translate(xPos - fontSize*3, yPos + graphHeight/2);
+                        ctx.rotate(3*Math.PI/2);
+                        ctx.fillText(yAxisTitle, 0, 0);
+                        //ctx.fillText("Y-Axis Title", xPos - 36, yPos + graphHeight/2);
+                        ctx.restore();
+                        console.log("Y-Axis is drawn");
+                    }
+                    //Draw the chart title
+                    function drawChartTitle(){
+                        console.log("drawChartTitle() is called");
+                        ctx.font = "30px Arial";
+                        ctx.fillText(title, width/2, yPos/2); 
+                    }
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="KWBOLq" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Drawing Titles" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/KWBOLq/">Drawing Titles</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Drawing Axis Values</h3 >
+            <p> For writing the axis values, the space was calculated by dividing the graphWidth & graphHeight in the canvas by the number of elements in the array. 
+                Not shown is a findMax() & findMin() function to calculate largest values in the array. This is done to get the difference and calculate the rate of 
+                increase and generate spaced out values accordingly. Basically, calculations are made to print out a suitable grid coordinate system. Note a few lines of code are missing
+                which prevent to some degree the text size from being too big in the codepen.
+                
+            </p>
+            <pre class="codeSample">
+                <code>
+                     //Draw the X axis values
+                    function drawXAxesValues(){
+                      console.log("X value labels");
+                      var xPosMark;
+                      var yPosMark;
+                      var value;
+                      ctx.textAlign = "center";
+                      for(var i = 0; i &lt; arrX.length; i++){
+                        xPosMark = i * (graphWidth/arrX.length) + margin * (factor + 1) +  barWidth/2;
+                        value = arrX[i];
+                        yPosMark= graphHeight - barHeight + (margin * factor) + fontSize;
+                        console.log("xPosMark: " + xPosMark + " yPos: " + yPosMark);
+                        ctx.fillText(value, xPosMark, yPosMark);
+                      }
+                    }
+                    drawXAxesValues();
+                    //Draw the Y axis values
+                    function drawYAxesValues(){
+                      console.log("Y value labels");
+                      var ySpacing = graphHeight/arrY.length;
+                      for(var i = 0; i &lt; arrY.length; i++){
+                        var xPosMark = xPos - fontSize;       
+                        var yPosMark= yPos + i * ySpacing;
+                        ctx.fillText(maxY- maxY/arrY.length * i, xPosMark, yPosMark);
+                      }
+                      ctx.fillText(0, xPos-fontSize, yPos + graphHeight);   //write 0 for y val
+                    }
+                    drawYAxesValues();
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="VpGZaZ" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Writing Axis Values" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/VpGZaZ/">Writing Axis Values</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Drawing Bar Graph With Animation</h3>
+            <p>To draw the bar graph, the following function was made. What's happening in the code is that in the loop, each time a new height, 
+                x position,& y position is computed to draw a rectangle. The trick to the animation is the call from requestAnimationFrame() 
+                which calls the the drawBarGraph() function. How it animates is that the percent/percentageComplete is multiplied with 
+                the percent value increasing at each call to drawBarGraph(). So what's happening is that rectangles are getting drawn 
+                over the older ones. In order to get the color the colorGraph() function, not shown here but in the codepen below.
+                <br/>
+                <a href='http://stackoverflow.com/questions/21972871/canvas-bar-graph-animation' class="aLink">Link to figuring out a way to animate.</a>
+                <br/>
+                <a href='http://www.w3resource.com/html5-canvas/html5-canvas-gradients-patterns.php' class="aLink">Link to ideas writing the colored gradient function.</a>
+            </p>
+            <pre class="codeSample">
+                <code>
+                    //Gets the new height relative to the maxY (scaling)
+                    var scale = maxY;
+                    var percent = 0;
+                    var step = 2;
+                    var percentageComplete = 100;
+                    function drawBarGraph(){
+                        for(var i = 0; i &lt; arrY.length; i++){
+                            ctx.fillStyle = colorGraph(i);
+                            barHeight = arrY[i]/scale * graphHeight * percent/percentageComplete;
+                            xPos = i * (barWidth + margin) + margin * (factor + 1);
+                            yPos = graphHeight - barHeight + (margin * factor);
+                            ctx.fillRect(xPos, yPos, barWidth, barHeight);
+                        }
+                        //animate the drawing
+                        if(percent &lt; 100){
+                            percent += step;
+                            requestAnimationFrame(drawBarGraph);
+                        }
+                    }
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="yMxBMj" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Drawing a Bar Graph with Animation" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/yMxBMj/">Drawing a Bar Graph with Animation</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Drawing Line Graph With Animation</h3>
+            <p>In order to draw a line graph, the animation specifically is a little trickier. So drawLineGraph() calcaultes the scaled distances between
+            the different data points of the array on the graph (distance between x1 & x2; y1 & y2). Then in inner for loop
+            it aggregates the data points between the distances into a points array object. In animateLinePlot(), like 
+            in the one before, what's happening is this function is being called, calling drawLine() [not shown here] to draw each smaller
+            segment. Note, the higher numPoints is, the more pieces to draw but the longer it takes to animate.</p>
+            <pre class="codeSample">
+                <code>
+                    //This animates the lines plot
+                    var delta = 0;
+                    var numPoints = 25;
+                    var points = [];    //needs to be defined globally to store all intermediate points between segments
+                    function animateLinePlot(){
+                        if(delta &lt; points.length - 3){
+                            requestAnimationFrame(animateLinePlot);
+                        }
+                        drawLine(points[delta].x, points[delta].y, points[delta+1].x, points[delta+1].y, delta);
+                        delta++;
+                    }
+
+                    //This draws the line graph
+                    function drawLineGraph(){
+                        var maxYY = findMax(arrY);
+                        var xRatio = graphWidth/arrX.length;
+                        var x1 = 0; 
+                        var y1 = 0;   
+                        var x2 = 0;
+                        var y2 = 0;
+                        //get points to draw
+                        for(var i = 0; i &lt; arrY.length - 1; i++){
+                            y1 = graphHeight - arrY[i]/maxYY * graphHeight + (margin * factor);
+                            y2 = graphHeight - arrY[i+1]/maxYY * graphHeight + (margin * factor);
+
+                            //For the line axis with titles
+                            x1 = xRatio * i + xPos + xRatio/2; //since has string labels, add half to align with center of text
+                            x2 = xRatio * (i+1) + xPos + xRatio/2; //since has string labels, add half to align with center of text                    
+                            
+
+                            //calculate the "numPoints" points between (x1,y1) & (x2,y2)
+                            var xPiece = x2 - x1;
+                            var yPiece = y2 - y1;     
+                            for(var j = 0; j &lt; numPoints; j++){
+                                var xPt = x1 + xPiece * j/numPoints;
+                                var yPt = y1 + yPiece * j/numPoints;
+                                points.push({x: xPt, y: yPt});
+                            }
+                        }
+                        animateLinePlot(points);
+                    }
+                </code>
+            </pre>
+            
+            <p data-height="444" data-theme-id="dark" data-slug-hash="bqxbXM" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Drawing a Line Graph with Animation" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/bqxbXM/">Drawing a Line Graph with Animation</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Exporting to CSV Feature</h3>
+            <p>Creating an export feature is rather easy. In order to do this, create a button and append it to the object. Then in the exportDataToCsv() function,
+            create a new array object, pushing in the array elements from both passed in data series into the array. Then add commas by calling the array join() 
+            function. From there, a anchor tag is created an href as below denotating it as a csv file. Finally, the anchor tag has to be clicked as to make 
+            sure it automatically opens.
+            <br/>
+            <a href='https://www.w3schools.com/tags/ref_urlencode.asp' class="aLink">Link to url encodes.</a> <br/>
+            <a href='http://stackoverflow.com/questions/19129216/how-do-i-correctly-download-a-csv-with-my-own-data' class="aLink">Link to doing doing the file conversion.</a>
+            </p>
+            
+            <pre class="codeSample">
+                <code>
+                    //Create button for download
+                    var button = document.createElement("BUTTON");
+                    var btnText = document.createTextNode("Download");
+                    button.appendChild(btnText);
+                    graphObj.appendChild(button);
+                    button.style.position = "absolute";
+                    button.style.float = "left";
+                    button.style.zIndex = 10;
+                    //setup onclick event to export data
+                    button.onclick = exportDataToCSV;
+
+                    //This function gets the arrays and converts them to a csv file to download
+                    function exportDataToCSV(){
+                        var arr = [['x', 'y']];
+                        for(var i = 1; i &lt;= arrX.length; i++){
+                            arr.push([arrX[i-1], arrY[i-1]]);
+                        }
+                        var csv = [];
+                        for(var i = 0; i &lt; arr.length; i++){
+                            csv.push(arr[i].join());        //join() automatically adds commas
+                        }
+                        console.log(csv);
+                        var csvString = csv.join("%0A");        //line feed or new line to separate each X, Y row object
+                        var anchor = document.createElement("a");
+                        anchor.href = "data:attachment/csv," + csvString;
+                        console.log("anchor href: " + anchor.href);
+                        anchor.target = '_blank';
+                        anchor.download = fileName + '.csv';
+                        document.body.appendChild(anchor);
+                        anchor.click(); //click on the link to automatically open
+                    }
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="ZeMEpg" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Exporting to CSV" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/ZeMEpg/">Exporting to CSV</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>
+            <h3>Adding A Tracing Feature & ToolTips</h3>
+            <p>To implement tracing feature, mouse movement had to be detected. The track cursor function calls on both the trace() and drawToolTip()
+            functions to respectively draw the trace on screen and/or the tooltip whenever the mouse is over the canvas. 
+            This is done without intefering with the original canvas by creating a second canvas overlaying it. So, when it clears the canvas
+            to update the position of the tooltip and tracer, it only clears the other canvas.
+             <br/>
+            <a href='https://www.w3schools.com/graphics/canvas_coordinates.asp' class="aLink">Link to getting mouse events.</a> 
+            </p>
+            <pre class="codeSample">
+                <code>
+                    //Create a second canvas to draw over the original graph (i.e. tooltips, traces, etc)
+                    var canvasTool = document.createElement('canvas');
+                    var ctxTool = canvasTool.getContext('2d');  
+                    canvasTool.height = canvas.height;
+                    canvasTool.width = canvas.width;
+                    canvasTool.style.zIndex = 10;
+                    graphObj.appendChild(canvasTool);       
+
+                    //This function creates a vertical line that tracks user movement along the graph 
+                    function trace(x, y, offSetGraph){
+                        ctxTool.font = 'bold 20px verdana';
+                        ctxTool.strokeStyle = "grey";
+                        ctxTool.lineWidth = 0.2;
+                        //Draw vertical line to trace 
+                        if(x > offSetGraph && x &lt; graphWidth + offSetGraph){
+                            //clear the graph
+                             ctxTool.clearRect(0, 0, width, height);
+                             ctxTool.beginPath();
+                             ctxTool.moveTo(x, offSetGraph);
+                             ctxTool.lineTo(x, offSetGraph + graphHeight);
+                             ctxTool.stroke();
+                        }
+                    }
+                    //This function shows the values x, y values in a popup based on mouse movement
+                    //Currently the xVal calculations are correct but the yVal calculations need debugging
+                    function drawToolTip(x, y){
+                        //Create tool tip
+                        var variance = 5;
+                        for(var i = 0; i &lt; points.length; i++){
+                            if((x &gt;= points[i].x - variance && x &lt;= points[i].x + variance) &amp;(y &gt;= points[i].y - variance && y &lt;= points[i].y + variance)){
+                                console.log("points matches: " + x + " " + points[i].x + " "+ y + " " + points[i].y);
+                                ctxTool.fillStyle = "grey";
+                                ctxTool.fillRect(x, y, 80,50);
+                                ctxTool.textAlign = "center";
+                                ctxTool.font= "8px Arial";
+                                ctxTool.fillStyle = "whitesmoke";
+                                var yVal = arrY[0] + Math.floor((i+1) * (findMax(arrY) - findMin(arrY))/(points.length-1));//Math.floor((graphHeight - y + offSetGraph)/delta);
+                                yVal = yVal.toFixed(2);
+                                var xVal = arrX[Math.floor((i+1)/numPoints)];
+                                ctxTool.fillText("x: " +  xVal + "   y: " +  yVal, x + 40, y + 25);
+                            }
+                        }
+                        
+                    }
+                    //This function tracks the mouse movement on the screen gets 
+                    //back the position of the cursor on the screen
+                    function trackCursor(e){
+                        var offSetGraph = factor * margin;
+                        var x = e.pageX - canvas.offsetLeft;
+                        var y = e.pageY - canvas.offsetTop;
+                        trace(x, y, offSetGraph);
+                        drawToolTip(x, y);
+                    }
+                    //Listen for mouse movement events
+                    canvas.addEventListener('mousemove', function(event){
+                        trackCursor(event);
+                    });
+                </code>
+            </pre>
+            <p data-height="444" data-theme-id="dark" data-slug-hash="GWXRyd" data-default-tab="js,result" data-user="casuallycoded" data-embed-version="2" data-pen-title="Exporting to CSV" class="codepen">See the Pen <a href="https://codepen.io/casuallycoded/pen/GWXRyd/">Exporting to CSV</a> by Hai (<a href="http://codepen.io/casuallycoded">@casuallycoded</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+            <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            <hr>    
+        </div>
+        <div id="page5" class="sng-page">
+            <h2>Conclusion & Summary</h2>
+            <div id="listConclusion">
+                <p>In summary to rehash what was done to make this framework:
+                </p>
+                <ol >
+                    <li> Create the empty div in html.
+                    </li>
+                    <li>
+                        Create the properties needed for the graph.
+                    </li>
+                    <li>
+                        Create the grid lines.
+                    </li>
+                    <li>
+                        Create the titles.
+                    </li>
+                    <li>
+                        Draw the axis values relative to the inner graph.
+                    </li>
+                    <li>
+                        Draw the bar graph with animation.
+                    </li>
+                    <li>
+                        Draw the line graph with animation.
+                    </li>
+                    <li>
+                        Export the arrays to a csv file format.
+                    </li>
+                    <li>
+                        Add tracing & tooltip capabilities to the line graph.
+                    </li>
+                </ol>
+                <hr/>
+                <p>Above all, this was a very fun project. I enjoyed learning the intricacies of designing this 
+                    graphing framework. If I had more time, I would definitely loved to have finished my zooming 
+                    feature and added a pie chart in. Also I would refactor the different chart abilities into 
+                    a factory too.
+                <hr/>
+                <p>Below is a link to a test page demonstrating some of the capabilities of the framework.</p>
+                
+            </div>
+            <div class="continue button button__blue" style="text-align: center; margin-bottom: 10%;"><a href="test.html">Go to Demo</a></div>
+        </div>
+        </div>
+        <script src="framework.js"></script>
+        <script>
+            'use strict';
+            //To avoid rewriting document.getElementById()
+            function my$(idName) {
+                return document.getElementById(idName);
+            }
+            
+            var graphFw = new GraphFW();
+            var barchart = new graphFw.MakeChart({
+                id: "canvas",
+                title: "Emotions",
+                width: "400",
+                height: "400",
+                chartType: "bar"
+            });
+            var linechart = new graphFw.MakeChart({
+                id: "canvas2",
+                chartType: "line",
+                margin: "8",
+                title: "Rainfalls",
+                xAxisTitle: "Days of the Week",
+                yAxisTitle: "Precip Amount",
+                width: "500",
+                height: "300"
+            });
+        </script>
+        <!-- Jquery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+
+            // Wait until all elements exist on the page before trying to reference anything ...
+            $(document).ready(function () {
+
+                // Selector: All <a> elements with a href attribute that starts with "#":
+                //    Learned this from   http://www.w3schools.com/jquery/jquery_ref_selectors.asp
+                // Event: When the selected elements are clicked ...
+                // Action: Run the following (unnamed) function
+                $('a[href^="#"]').click(function () {
+
+                    // "this" means the element involved in the event, so, the link that was clicked.
+                    console.log("this");
+                    console.log(this); // if you console.log an object, you'll see nice tree view
+                    // of the object's properties in the console (F12 from Chrome)
+                    console.log("-");
+
+                    // ".hash" refers to the href attribute of the <a> tag. So, if <a href="#page1">
+                    // was clicked, then "this.hash" has this value: "#page1"
+                    console.log("this.hash");
+                    console.log(this.hash);
+                    console.log("-");
+
+                    // $ is a jQuery function which returns a jQuery object that references the
+                    // specified HTML element. For example, $("#content") returns a jQuery
+                    // object that references the HTML element with id="content", but also has
+                    // loads of contextual information about that element (e.g., parent, siblings, 
+                    // and many other properties.
+
+                    // So, target will contain a jQuery object (with loads of info) about the element that 
+                    // is "being linked to" (the element referenced by the href attribute).
+                    var target = $(this.hash);
+                    console.log("$(this.hash)");
+                    console.log(target);
+                    console.log("-");
+
+                    // if (whatever) returns "not false" if 'whatever' exists.
+                    if (target.length) {
+
+                        // animate is a jQuery function (what_to_do, how_fast_in_millisecs). 
+                        // "what_to_do" is an object with any number of CSS property/value pairs:
+                        /*
+                         * $("button").click(function(){
+                         $("div").animate({
+                         left: '250px',
+                         opacity: '0.5',
+                         height: '150px',
+                         },500);
+                         }); 
+                         */
+                        // 
+                        // scrollTop is a javaScript property of any DOM element. 
+                        // It measures the number of pixels from the DOM element to the top of 
+                        // of the DOM element's scrollable parent element.
+                        //           see http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_scrollleft
+                        // 
+                        // .offset() is a function (of any jQuery object) that returns an object with 
+                        // top and left properties (top/left relative to the document).
+
+                        $('html, body').animate({
+                            // set the scrollTop property (of the browser)
+                            // to be the top attribute of the element being linked to
+                            scrollTop: target.offset().top
+                        }, 900);  // but do it a bit slow (900 millisecs)
+                    }
+
+                });
+
+                // when user clicks the navIcon, it toggles (makes visible/invisible)
+                // the element after that (navGroup).
+                $("#navIcon").click(function () {  
+                    $(this).next().toggle(); // hide if showing, show if hiding. 
+                });
+
+                // make the navGroup is visible when resizing to >= 600 px (desktop).
+                // make the navGroup is invisible when resizing to < 600 px (mobile).
+                // there seems to be a 20 pixel discrepancy between width of titleNav
+                // and width of browser viewing area (that's why testing 560 not 580)
+                $(window).resize(function () {
+                    var wide = $('#titleNav').css("width");
+                    wide = parseInt(wide);
+                    //console.log("width " + wide);
+                    if (wide >= 600) {
+                        jQuery('#navGroup').css("display", "block");
+                        //console.log("show navGroup");
+                    } else {
+                        jQuery('#navGroup').css("display", "none");
+                        //dynamically change textarea 
+                        //var txtArea = document.getElementById("textArea").cols=25;
+                        //console.log("text area col size " + txtArea);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
+

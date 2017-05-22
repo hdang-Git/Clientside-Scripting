@@ -1,0 +1,39 @@
+<h2>{{insertUpdate}} Scientist</h2>
+
+<table>
+    <!-- this row will be hidden or displayed depending on the value of boolean isUpdateMode -->
+    <tr data-ng-show="isUpdateMode">
+        <td class="fieldName">Id</td>
+        <td>{{newscientist.scientistId}}</td>
+        <td class="fieldError">{{myErrors.scientistId}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Scientist Email</td>
+        <td><input type="text" ng-model="newscientist.scientistEmail"></td>
+        <td class="fieldError">{{myErrors.scientistEmail}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Scientist Password</td>
+        <td><input type="text" ng-model="newscientist.scientistPassword"></td>
+        <td class="fieldError">{{myErrors.scientistPassword}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Scientist Name</td>
+        <td><input type="text" ng-model="newscientist.scientistName"></td>
+        <td class="fieldError">{{myErrors.scientistName}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">User Role</td>
+        <td><input type="text" ng-model="newscientist.userRole"></td>
+        <td class="fieldError">{{myErrors.userRole}}</td>
+    </tr>
+</table>
+
+<p>
+    <input type="button" value="Insert Save" data-ng-show="isInsertMode" data-ng-click="insertSave()">
+    <input type="button" value="Update Save" data-ng-show="isUpdateMode" data-ng-click="updateSave()">
+    &nbsp;&nbsp;&nbsp;{{status}}
+</p>
+<p>
+    <a href="#/list" class="link">back to list</a>
+</p>

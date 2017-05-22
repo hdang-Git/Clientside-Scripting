@@ -1,0 +1,45 @@
+<h2>{{insertUpdate}} Planet</h2>
+
+<table>
+    <!-- this row will be hidden or displayed depending on the value of boolean isUpdateMode -->
+    <tr data-ng-show="isUpdateMode">
+        <td class="fieldName">Id</td>
+        <td>{{newplanet.planetId}}</td>
+        <td class="fieldError">{{myErrors.planetId}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Planet Name</td>
+        <td><input type="text" ng-model="newplanet.planetName"></td>
+        <td class="fieldError">{{myErrors.planetName}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Planet Size</td>
+        <td><input type="text" ng-model="newplanet.planetSize"></td>
+        <td class="fieldError">{{myErrors.planetSize}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Date Discovered</td>
+        <td><input type="text" ng-model="newplanet.dateDiscovered"></td>
+        <td class="fieldError">{{myErrors.dateDiscovered}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Description</td>
+        <td><input type="text" ng-model="newplanet.planetDescrip"></td>
+        <td class="fieldError">{{myErrors.planetDescrip}}</td>
+    </tr>
+    <tr>
+        <td class="fieldName">Image Url</td>
+        <td><input type="text" ng-model="newplanet.planetURL"></td>
+        <td class="fieldError">{{myErrors.planetURL}}</td>
+    </tr>
+
+</table>
+
+<p>
+    <input type="button" value="Insert Save" data-ng-show="isInsertMode" data-ng-click="insertSave()">
+    <input type="button" value="Update Save" data-ng-show="isUpdateMode" data-ng-click="updateSave()">
+    &nbsp;&nbsp;&nbsp;{{status}}
+</p>
+<p>
+    <a href="#/home" class="link">back to list</a>
+</p>
